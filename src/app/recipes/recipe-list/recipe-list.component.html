@@ -1,0 +1,35 @@
+<div class="container" style="margin-top: 70px;">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let recipe of recipes">
+
+        <td>{{ recipe.id }}</td>
+        <td> {{ recipe.name }}</td>
+        <td> {{ recipe.email }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="selectRecipe(recipe)"> Show details</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="card text-center" *ngIf="selectedRecipe">
+      <div class="card-header">
+        # {{selectedRecipe.id}}
+      </div>
+      <div class="card-block">
+        <h4 class="card-title">{{selectedRecipe.name}}</h4>
+        <p class="card-text">
+          {{selectedRecipe.description}}
+        </p>    
+      </div>
+
+    </div>
+</div>
