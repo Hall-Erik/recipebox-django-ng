@@ -1,13 +1,59 @@
-<div class="container" style="margin-top: 70px;">
-  <div class="card text-center" *ngIf="recipe">
-      <div class="card-header">
-        # {{recipe.id}}
+<div class="content-section">
+  <div class="d-flex flex-wrap">
+    <div class="mr-auto p-2 bd-highlight">
+      <h2>{{recipe.title}}</h2>
+    </div>
+<!-- <div class="p-2 bd-highlight">
+				<a class="btn btn-outline-info" href="#">Edit</a>
+				<button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+			</div> -->
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-3">
+      <img class="recipe-pic" src="{{recipe.imageUrl}}" />
+    </div>
+    <div class="col-sm-12 col-md-9">
+      <div class="row">
+        <small class="text-muted">
+          User: <a>{{recipe.userId}}</a> | Cook time: {{recipe.cookTime}} minutes | Serves: {{ recipe.servings }}
+        </small>
       </div>
-      <div class="card-block">
-        <h4 class="card-title">{{recipe.title}}</h4>
-        <p class="card-text">
-          {{recipe.description}}
-        </p>    
+      <div class="row">
+        <p>{{recipe.description}}</p>
       </div>
     </div>
+  </div>
+  <div class="row mt-2">
+    <div>
+      <input type="button" id="made-it" class="btn btn-outline-success" value="✓ Made it." />
+      <!-- <input type="button" id="made-it" class="btn btn-success" value="Made it?" /> -->
+    </div>
+    <div class="ml-1"></div>
+  </div>
+  <div class="row">
+    <div *ngIf="recipe.ingredients" class="col-sm-12 col-md-4">
+      <div class="row">
+        <h3>Ingredients</h3>
+      </div>
+      <div class="row">
+        <ul>
+          <li *ngFor="let ingredient of recipe.ingredients.split('\n')">
+            {{ingredient}}
+          </li>
+        </ul>
+      </div>
+    </div>	
+    <div *ngIf="recipe.directions" class="col-sm-12 col-md-8">
+      <div class="row">			
+        <h3>Directions</h3>
+      </div>	
+      <div class="row">
+        <ol>
+          <li *ngFor="let direction of recipe.directions.split('\n')">
+            {{direction}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
 </div>

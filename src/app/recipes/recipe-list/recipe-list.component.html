@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-sm-6 col-md-3 mb-1" *ngFor="let recipe of recipes">
     <div class="card h-100" routerLink="/recipe/{{recipe.id}}">
       <div class="card-img-top home-recipe-pic-div">
-        <img class="home-recipe-pic" src="{{ recipe.imageUrl }}" />
+        <img class="home-recipe-pic" src="{{recipe.imageUrl}}" />
       </div>
       <div class="card-body">
         <h4 class="card-title"><a>{{recipe.title}}</a></h4>
