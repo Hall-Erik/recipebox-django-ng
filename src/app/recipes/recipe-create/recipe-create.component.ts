@@ -27,15 +27,14 @@ export class RecipeCreateComponent implements OnInit {
       ingredients: "",
       directions: "",
       imageUrl: "",
-      datePosted: "",
-      userId: null
+      datePosted: "1/1/19",
+      userId: 1
     };
   }
 
   createRecipe() {
     console.log(this.recipe);
-    this.recipeService.createRecipt(this.recipe);
+    this.recipeService.createRecipe(this.recipe);
     this.initRecipe();
   }
-
 }
