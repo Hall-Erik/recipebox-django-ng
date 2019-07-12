@@ -1,20 +1,21 @@
 from rest_framework.views import APIView
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
+from .models import Recipe
+from .serializers import UserSerializer, RecipeSerializer
 
 
-class HelloView(APIView):
+class RecipeCreate(CreateAPIView):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request):
-        user = request.user.username
-        content = {
-            'user': user,
-            'message': "hello"}
-        return Response(content)
+
+class RecipeList(ListAPIView):
+    queryset = Recipe.objects.all().order_by('-date_posted')
+    serializer_class = RecipeSerializer
 
 
 class RegisterView(CreateAPIView):
