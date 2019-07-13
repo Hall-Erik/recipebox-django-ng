@@ -1,0 +1,9 @@
+Django==2.2.3
+djangorestframework==3.9.4
+entrypoints==0.3
+flake8==3.7.8
+mccabe==0.6.1
+pycodestyle==2.5.0
+pyflakes==2.1.1
+pytz==2019.1
+sqlparse==0.3.0
