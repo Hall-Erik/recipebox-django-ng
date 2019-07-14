@@ -1,30 +1,27 @@
 from rest_framework.views import APIView
 from rest_framework.generics import (
-    CreateAPIView, ListAPIView, UpdateAPIView)
+    CreateAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView)
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 from .models import Recipe
 from .serializers import UserSerializer, RecipeSerializer
 
 
-class RecipeCreate(CreateAPIView):
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
-    permission_classes = (IsAuthenticated,)
-
-
-class RecipeList(ListAPIView):
+class RecipeListCreate(ListCreateAPIView):
     queryset = Recipe.objects.all().order_by('-date_posted')
     serializer_class = RecipeSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
-class RecipeUpdate(UpdateAPIView):
+class RecipeRUD(RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     lookup_field = 'id'
-    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
 class RegisterView(CreateAPIView):
