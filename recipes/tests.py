@@ -3,7 +3,7 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
-from .serializers import RecipeSerializer
+from .serializers import RecipeSerializer, UserSerializer
 from .models import Recipe
 
 
@@ -21,6 +21,29 @@ class RegisterUserTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 1)
         self.assertEqual(User.objects.get().username, 'test')
+
+
+class CurrentUserViewTests(TestCase):
+    def test_anon_cannot_access(self):
+        '''
+        Anon user cannot access this endpoint.
+        '''
+        url = reverse('current_user')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_user_can_access(self):
+        '''
+        Authenticated users can retrieve from here.
+        '''
+        user = User.objects.create_user(username='steve', email='s@s.com')
+        client = APIClient()
+        client.force_authenticate(user=user)
+        url = reverse('current_user')
+        response = client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        serializer = UserSerializer(user)
+        self.assertEqual(response.data, serializer.data)
 
 
 class RecipeListCreateTests(TestCase):
