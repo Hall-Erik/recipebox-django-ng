@@ -17,7 +17,7 @@ class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_image_url(self):
-        if self.image_file == None:
+        if self.image_file is None:
             return 'img/default.png'
         return self.image_file
 

@@ -6,7 +6,7 @@ from .models import Recipe
 class RecipeSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault())
-    
+
     class Meta:
         model = Recipe
         fields = (
@@ -33,4 +33,3 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(data['password'])
         user.save()
         return user
-    

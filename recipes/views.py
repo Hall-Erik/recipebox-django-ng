@@ -1,9 +1,7 @@
-from rest_framework.views import APIView
 from rest_framework.generics import (
     CreateAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView)
-from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
