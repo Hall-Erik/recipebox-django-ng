@@ -25,7 +25,7 @@ SECRET_KEY = 'j+nvod*ogf=o!is-vbbzj+5mc5dxy(9tjalelqg4j@jz#!wpo)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
