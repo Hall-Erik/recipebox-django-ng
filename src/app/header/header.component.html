@@ -13,18 +13,24 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/recipes/create">New Recipe</a>
+          <a class="nav-link" *ngIf="logged_in" routerLink="/recipes/create">New Recipe</a>
         </li>
-        <li class="dropdown show">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="!logged_in" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="!logged_in" routerLink="/login">Login</a>
+        </li>
+        <li class="dropdown show" *ngIf="logged_in">
             <a class="nav-item nav-link dropdown-toggle"
             href="#" role="button" id="dropdownMenuLink"
             data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Username</a>
+            aria-expanded="false">{{username}}</a>
             <div class="dropdown-menu dropdown-menu-right"
             aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" >User Stats</a>
-              <a class="dropdown-item" >Account Settings</a>
-              <a class="dropdown-item" >Logout</a>
+              <a class="dropdown-item link" >User Stats</a>
+              <a class="dropdown-item link" >Account Settings</a>
+              <a class="dropdown-item link" (click)="logout()">Logout</a>
             </div>
         </li>
       </ul>

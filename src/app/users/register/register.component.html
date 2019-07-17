@@ -1,0 +1,36 @@
+<h3>{{message}}</h3>
+<div class="content-section">
+  <div class="form-group">
+    <form (ngSubmit)="register()">
+      <div class="user-name">
+        <input type="text"
+              placeholder="Username"
+              required
+              name="username"
+              #usernameField="ngModel"
+              [(ngModel)]="username">
+        <div *ngIf="usernameField.errors && usernameField.errors.required">Username is Mandatory</div>
+      </div>
+      <div class="email">
+        <input type="text"
+              placeholder="Email"
+              required
+              name="email"
+              #emailField="ngModel"
+              [(ngModel)]="email">
+        <div *ngIf="emailField.errors && emailField.errors.required">Email is Mandatory</div>
+      </div>
+      <div class="password">
+        <input type="password"
+              placeholder="Password"
+              required
+              name="password"
+              #passwordField="ngModel"
+              [(ngModel)]="password">
+        <div *ngIf="passwordField.errors && passwordField.errors.required">Password is Mandatory</div>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+
+  </div>
+</div>

@@ -1,15 +1,19 @@
 .bg-gray {
-    background-color: #6c737f;
+  background-color: #6c737f;
 }
 
 .navbar-nav .nav-link {
-    color: #dee4e8;
-  }
+  color: #dee4e8;
+}
   
 .navbar-nav .nav-link:hover {
-color: #ffffff;
+  color: #ffffff;
 }
 
 .navbar-nav .nav-link.active {
-font-weight: 500;
+  font-weight: 500;
+}
+
+.link {
+  cursor: pointer;
 }

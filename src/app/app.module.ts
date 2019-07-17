@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -9,20 +10,33 @@ import { RecipeCreateComponent } from './recipes/recipe-create/recipe-create.com
 import { HeaderComponent } from './header/header.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 
+import { RecipeService } from './services/recipe.service';
+import { UserService } from './services/user.service';
+import { UserTokenService } from './services/user-token.service';
+import { RegisterComponent } from './users/register/register.component';
+import { LoginComponent } from './users/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     RecipeListComponent,
     RecipeCreateComponent,
     HeaderComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    RecipeService,
+    UserService,
+    UserTokenService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
