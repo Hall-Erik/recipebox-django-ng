@@ -15,7 +15,6 @@ import { LoginComponent } from './users/login/login.component';
 
 import { RecipeService } from './services/recipe.service';
 import { UserService } from './services/user.service';
-import { UserTokenService } from './services/user-token.service';
 import { RecipeInterceptor } from './services/recipe.interceptor';
 
 @NgModule({
@@ -37,7 +36,6 @@ import { RecipeInterceptor } from './services/recipe.interceptor';
   providers: [
     RecipeService,
     UserService,
-    UserTokenService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RecipeInterceptor,
