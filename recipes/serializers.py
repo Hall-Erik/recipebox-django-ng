@@ -3,20 +3,6 @@ from django.contrib.auth.models import User
 from .models import Recipe
 
 
-class RecipeSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(
-        default=serializers.CurrentUserDefault())
-
-    class Meta:
-        model = Recipe
-        fields = (
-            'id', 'title', 'description', 'cook_time', 'servings',
-            'date_posted', 'image_file', 'ingredients', 'directions',
-            'user')
-        extra_kwargs = {
-            'id': {'read_only': True}}
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -33,3 +19,19 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(data['password'])
         user.save()
         return user
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+    # user = serializers.HiddenField(
+    #     default=serializers.CurrentUserDefault())
+    # user = serializers.PrimaryKeyRelatedField(
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Recipe
+        fields = (
+            'id', 'title', 'description', 'cook_time', 'servings',
+            'date_posted', 'image_file', 'ingredients', 'directions',
+            'user')
+        extra_kwargs = {
+            'id': {'read_only': True}}

@@ -19,13 +19,8 @@ class RecipeListCreate(ListCreateAPIView):
     serializer_class = RecipeSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
-
-class CurrentUserView(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class RecipeRUD(RetrieveUpdateDestroyAPIView):
@@ -33,6 +28,14 @@ class RecipeRUD(RetrieveUpdateDestroyAPIView):
     serializer_class = RecipeSerializer
     lookup_field = 'id'
     permission_classes = (IsOwnerOrReadOnly,)
+
+
+class CurrentUserView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
 
 
 class RegisterView(CreateAPIView):
