@@ -13,8 +13,6 @@ export class LoginComponent {
   public username: string = '';
   public password: string = '';
 
-  public message: string = '';
-
   constructor(
     private userService: UserService,
     private router: Router

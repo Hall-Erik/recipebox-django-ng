@@ -1,36 +1,49 @@
-<h3>{{message}}</h3>
-<div class="content-section">
-  <div class="form-group">
-    <form (ngSubmit)="register()">
-      <div class="user-name">
-        <input type="text"
-              placeholder="Username"
-              required
-              name="username"
-              #usernameField="ngModel"
-              [(ngModel)]="username">
-        <div *ngIf="usernameField.errors && usernameField.errors.required">Username is Mandatory</div>
-      </div>
-      <div class="email">
-        <input type="text"
-              placeholder="Email"
-              required
-              name="email"
-              #emailField="ngModel"
-              [(ngModel)]="email">
-        <div *ngIf="emailField.errors && emailField.errors.required">Email is Mandatory</div>
-      </div>
-      <div class="password">
-        <input type="password"
-              placeholder="Password"
-              required
-              name="password"
-              #passwordField="ngModel"
-              [(ngModel)]="password">
-        <div *ngIf="passwordField.errors && passwordField.errors.required">Password is Mandatory</div>
-      </div>
-      <button type="submit">Register</button>
-    </form>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2 content-section">
+      <h2>Register</h2>
+      <form (ngSubmit)="register()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text"
+                 class="form-control"
+                 required
+                 name="username"
+                 #usernameField="ngModel"
+                 [(ngModel)]="username">
+          <div *ngIf="usernameField.errors && usernameField.errors.required">
+            <small>Username is Mandatory</small>
+          </div>
+        </div>
 
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text"
+                  class="form-control"
+                  required
+                  name="email"
+                  #emailField="ngModel"
+                  [(ngModel)]="email">
+          <div *ngIf="emailField.errors && emailField.errors.required">
+            <small>Email is Mandatory</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password"
+                class="form-control"
+                required
+                name="password"
+                #passwordField="ngModel"
+                [(ngModel)]="password">
+          <div *ngIf="passwordField.errors && passwordField.errors.required">
+            <small>Password is Mandatory</small>
+          </div>
+        </div>
+
+        <button type="submit">Register</button>          
+      </form>
+    </div>
   </div>
 </div>

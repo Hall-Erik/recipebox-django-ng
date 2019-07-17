@@ -13,8 +13,6 @@ export class RegisterComponent {
   public email: string = '';
   public password: string = '';
 
-  public message: string = '';
-
   constructor(
     private userService: UserService,
     private router: Router
@@ -24,11 +22,9 @@ export class RegisterComponent {
     this.userService.register(this.username, this.email, this.password)
       .subscribe((resp) => {
         console.log('Successfully registered!');
-        this.message = resp.msg;
         this.router.navigate(['login']);
       }, (err) => {
         console.log('Something went wrong!');
-        this.message = err.error.msg;
       });
   }
 }
