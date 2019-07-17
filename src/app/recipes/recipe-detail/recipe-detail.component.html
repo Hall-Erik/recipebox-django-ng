@@ -3,10 +3,11 @@
     <div class="mr-auto p-2 bd-highlight">
       <h2>{{recipe.title}}</h2>
     </div>
-<!-- <div class="p-2 bd-highlight">
-				<a class="btn btn-outline-info" href="#">Edit</a>
-				<button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-			</div> -->
+    <div *ngIf="owner" class="p-2 bd-highlight">
+      <a class="btn btn-outline-info" href="#">Edit</a>
+      <button class="btn btn-outline-danger"
+      (click)="delete()">Delete</button>
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-12 col-md-3">

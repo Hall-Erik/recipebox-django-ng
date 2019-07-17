@@ -9,6 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class RecipeService {
 
   constructor(private http: HttpClient) { }
+  
+  public createRecipe(recipe: Recipe): Observable<any> {
+    return this.http.post('/api/recipes/', recipe);
+  }
 
   public getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>('/api/recipes/');
@@ -18,7 +22,7 @@ export class RecipeService {
     return this.http.get<Recipe>(`/api/recipes/${id}`);
   }
 
-  public createRecipe(recipe: Recipe): Observable<any> {
-    return this.http.post('/api/recipes/', recipe);
+  public deleteRecipe(id: Number): Observable<any> {
+    return this.http.delete(`/api/recipes/${id}`);
   }
 }

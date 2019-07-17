@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserTokenService } from '../services/user-token.service';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-header',
@@ -8,22 +10,17 @@ import { UserTokenService } from '../services/user-token.service';
 })
 export class HeaderComponent implements OnInit {
   public logged_in: boolean = false;
-  public username: string = '';
-
+  
+  
   constructor(
-    private userToken: UserTokenService
+    private userToken: UserTokenService,
+    public userService: UserService
   ) { }
 
   ngOnInit() {
     this.userToken.isLoggedIn().subscribe(
-      val => {
-        this.logged_in = val;
-        if (val) {
-          this.username = this.userToken.username;
-        } else {
-          this.username = '';
-        }
-      });
+      (val) => {
+        this.logged_in = val});
   }
 
   logout() {
