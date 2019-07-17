@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Recipe {
     id: number;
     title: string;
@@ -8,5 +10,5 @@ export interface Recipe {
     image_file: string;
     ingredients: string;
     directions: string;
-    // userId: number;
+    user: User;
 }
