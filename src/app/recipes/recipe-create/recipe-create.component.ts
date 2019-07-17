@@ -23,18 +23,25 @@ export class RecipeCreateComponent implements OnInit {
       title: "",
       description: "",
       servings: "",
-      cookTime: "",
+      cook_time: "",
       ingredients: "",
       directions: "",
-      imageUrl: "",
-      datePosted: "1/1/19",
-      userId: 1
+      image_file: "",
+      datePosted: "1/1/19"
+      // userId: 1
     };
   }
 
   createRecipe() {
     console.log(this.recipe);
-    this.recipeService.createRecipe(this.recipe);
-    this.initRecipe();
+    this.recipeService.createRecipe(this.recipe)
+      .subscribe((result: any) => {
+        console.log("Stock created.");
+        console.log(result);
+        this.initRecipe();
+      }, (err) => {
+        console.log("Couldn't create stock.");
+        console.log(err.error.msg);
+      });
   }
 }
