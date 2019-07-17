@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from 'src/app/models/recipe';
 
@@ -11,7 +12,9 @@ export class RecipeCreateComponent implements OnInit {
 
   recipe: Recipe;
   
-  constructor(public recipeService: RecipeService) { }
+  constructor(
+    public recipeService: RecipeService,
+    private router: Router) { }
 
   ngOnInit() {
     this.initRecipe();
@@ -37,8 +40,7 @@ export class RecipeCreateComponent implements OnInit {
     this.recipeService.createRecipe(this.recipe)
       .subscribe((result: any) => {
         console.log("Stock created.");
-        console.log(result);
-        this.initRecipe();
+        this.router.navigate(['index']);
       }, (err) => {
         console.log("Couldn't create stock.");
         console.log(err.error.msg);
