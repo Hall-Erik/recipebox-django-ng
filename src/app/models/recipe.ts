@@ -2,11 +2,11 @@ export interface Recipe {
     id: number;
     title: string;
     description: string;
-    cookTime: string;
+    cook_time: string;
     servings: string;
     datePosted: string;
-    imageUrl: string;
+    image_file: string;
     ingredients: string;
     directions: string;
-    userId: number;
+    // userId: number;
 }
