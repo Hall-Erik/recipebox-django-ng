@@ -10,23 +10,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  public recipe: Recipe = {
-    id: null,
-    title: '',
-    description: '',
-    datePosted: '',
-    servings: '',
-    cook_time: '',
-    ingredients: '',
-    directions: '',
-    image_file: '',
-    user: {
-      id: null,
-      username: '',
-      email: ''
-    }
-  };
-
+  public recipe: Recipe;
   public owner: boolean = false;
 
   constructor(private recipeService: RecipeService,
@@ -46,12 +30,14 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   delete() {
-    this.recipeService.deleteRecipe(this.recipe.id)
-      .subscribe((resp) => {
-        console.log('Recipe deleted.');
-        this.router.navigate(['index']);
-      }, (err) => {
-        console.log(err.error.msg);
-      })
+    if (confirm('Are you sure you want to delete this recipe?')) {
+      this.recipeService.deleteRecipe(this.recipe.id)
+        .subscribe((resp) => {
+          console.log('Recipe deleted.');
+          this.router.navigate(['index']);
+        }, (err) => {
+          console.log(err.error.msg);
+        });
+    }
   }
 }
