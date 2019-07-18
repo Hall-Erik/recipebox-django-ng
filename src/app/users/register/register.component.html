@@ -42,6 +42,25 @@
           </div>
         </div>
 
+        <div class="form-group">
+            <label for="confirmpassword">Confirm Password</label>
+            <input type="password"
+                  class="form-control"
+                  required
+                  pattern="{{passwordField.value}}"
+                  name="confirmpassword"
+                  #confirmpasswordField="ngModel"
+                  [(ngModel)]="confirmpassword">
+            <div *ngIf="confirmpasswordField.errors && confirmpasswordField.touched">
+              <div *ngIf="confirmpasswordField.errors.required">
+                <small>This field is required</small>
+              </div>
+              <div *ngIf="confirmpasswordField.errors.pattern">
+                <small>Password and Confirm Password must match</small>
+              </div>
+            </div>
+          </div>
+
         <button type="submit">Register</button>          
       </form>
     </div>
