@@ -22,7 +22,11 @@ export class RecipeService {
     return this.http.get<Recipe>(`/api/recipes/${id}`);
   }
 
-  public deleteRecipe(id: Number): Observable<any> {
+  public updateRecipe(id: number, recipe: Recipe): Observable<any> {
+    return this.http.put(`/api/recipes/${id}`, recipe);
+  }
+
+  public deleteRecipe(id: number): Observable<any> {
     return this.http.delete(`/api/recipes/${id}`);
   }
 }

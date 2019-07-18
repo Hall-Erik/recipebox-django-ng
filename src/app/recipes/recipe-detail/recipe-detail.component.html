@@ -4,7 +4,7 @@
       <h2>{{recipe.title}}</h2>
     </div>
     <div *ngIf="owner" class="p-2 bd-highlight">
-      <a class="btn btn-outline-info" href="#">Edit</a>
+      <a class="btn btn-outline-info" routerLink="/recipe/{{recipe.id}}/edit">Edit</a>
       <button class="btn btn-outline-danger"
       (click)="delete()">Delete</button>
     </div>

@@ -16,6 +16,7 @@ import { LoginComponent } from './users/login/login.component';
 import { RecipeService } from './services/recipe.service';
 import { UserService } from './services/user.service';
 import { RecipeInterceptor } from './services/recipe.interceptor';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RecipeInterceptor } from './services/recipe.interceptor';
     HeaderComponent,
     RecipeDetailComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,

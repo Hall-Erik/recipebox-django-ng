@@ -9,8 +9,7 @@ import { Recipe } from 'src/app/models/recipe';
   styleUrls: ['./recipe-create.component.css']
 })
 export class RecipeCreateComponent implements OnInit {
-
-  recipe: Recipe;
+  public recipe: Recipe;
   
   constructor(
     public recipeService: RecipeService,
@@ -36,14 +35,9 @@ export class RecipeCreateComponent implements OnInit {
   }
 
   createRecipe() {
-    console.log(this.recipe);
     this.recipeService.createRecipe(this.recipe)
       .subscribe((result: any) => {
-        console.log("Stock created.");
         this.router.navigate(['index']);
-      }, (err) => {
-        console.log("Couldn't create stock.");
-        console.log(err.error.msg);
       });
   }
 }
