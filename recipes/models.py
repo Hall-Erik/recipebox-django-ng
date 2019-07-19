@@ -23,3 +23,8 @@ class Recipe(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+
+class MadeRecipe(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
