@@ -8,9 +8,10 @@ from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
     IsAuthenticatedOrReadOnly)
+from rest_framework import status
 from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
-from .models import Recipe
+from .models import Recipe, MadeRecipe
 from .serializers import UserSerializer, RecipeSerializer
 
 
@@ -45,11 +46,20 @@ class RecipeRUD(RetrieveUpdateDestroyAPIView):
 class MakeRecipeView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
-        pass
+    def post(self, request, id):
+        if MadeRecipe.objects.filter(
+          user_id=request.user.id, recipe_id=id).count() == 1:
+            return Response(status.HTTP_400_BAD_REQUEST)
+        MadeRecipe.objects.create(recipe_id=id, user=request.user)
+        return Response(status=status.HTTP_201_CREATED)
 
-    def delete(self, request):
-        pass
+    def delete(self, request, id):
+        mr = MadeRecipe.objects.filter(
+          user_id=request.user.id, recipe_id=id).first()
+        if not mr:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        mr.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class CurrentUserView(APIView):

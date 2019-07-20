@@ -332,3 +332,62 @@ class RecipeRetrieveUpdateDestroyTests(TestCase):
         response = client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Recipe.objects.count(), 0)
+
+
+class MadeRecipeTests(TestCase):
+    def test_anon_cannot_access(self):
+        '''
+        Anon users cannot use this view.
+        '''
+        owner = User.objects.create_user(username='steve')
+        recipe = Recipe.objects.create(
+            title='stew', description='a nice stew',
+            cook_time='5', servings='12',
+            ingredients='water, beef, celery',
+            directions='cook, eat', user=owner)
+        url = reverse('recipe_make', kwargs={'id': recipe.id})
+        make_resp = self.client.post(url, format='json')
+        unmake_resp = self.client.delete(url, format='json')
+        self.assertEqual(make_resp.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(unmake_resp.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_can_make_recipe(self):
+        '''
+        Users can add recipes to their list of
+        made recipes.
+        '''
+        client = APIClient()
+        owner = User.objects.create_user(username='steve')
+        user = User.objects.create_user(username='bob')
+        recipe = Recipe.objects.create(
+            title='stew', description='a nice stew',
+            cook_time='5', servings='12',
+            ingredients='water, beef, celery',
+            directions='cook, eat', user=owner)
+        url = reverse('recipe_make', kwargs={'id': recipe.id})
+        client.force_authenticate(user=user)
+        response = client.post(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(
+            MadeRecipe.objects.filter(recipe=recipe, user=user).count(), 1)
+
+    def test_can_unmake_recipe(self):
+        '''
+        Users can add recipes to their list of
+        made recipes.
+        '''
+        client = APIClient()
+        owner = User.objects.create_user(username='steve')
+        user = User.objects.create_user(username='bob')
+        recipe = Recipe.objects.create(
+            title='stew', description='a nice stew',
+            cook_time='5', servings='12',
+            ingredients='water, beef, celery',
+            directions='cook, eat', user=owner)
+        MadeRecipe.objects.create(user=user, recipe=recipe)
+        url = reverse('recipe_make', kwargs={'id': recipe.id})
+        client.force_authenticate(user=user)
+        response = client.delete(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(
+            MadeRecipe.objects.filter(recipe=recipe, user=user).count(), 0)
