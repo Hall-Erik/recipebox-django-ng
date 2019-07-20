@@ -30,6 +30,7 @@ export class RecipeCreateComponent implements OnInit {
       directions: "",
       image_file: "",
       datePosted: "1/1/19",
+      made_it: false,
       user: null
     };
   }

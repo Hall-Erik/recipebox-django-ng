@@ -29,4 +29,12 @@ export class RecipeService {
   public deleteRecipe(id: number): Observable<any> {
     return this.http.delete(`/api/recipes/${id}`);
   }
+
+  public makeRecipe(id: number): Observable<any> {
+    return this.http.post(`/api/recipes/${id}/made/`, null);
+  }
+
+  public unmakeRecipe(id: number): Observable<any> {
+    return this.http.delete(`/api/recipes/${id}/made/`);
+  }
 }

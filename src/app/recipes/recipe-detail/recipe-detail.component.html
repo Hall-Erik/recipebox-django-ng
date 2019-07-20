@@ -25,9 +25,13 @@
     </div>
   </div>
   <div class="row mt-2">
-    <div>
-      <input type="button" id="made-it" class="btn btn-outline-success" value="✓ Made it." />
-      <!-- <input type="button" id="made-it" class="btn btn-success" value="Made it?" /> -->
+    <div *ngIf="logged_in">
+      <input *ngIf="recipe.made_it" type="button" id="made-it"
+      class="btn btn-outline-success" value="✓ Made it."
+      (click)="unmake()" />
+      <input *ngIf="!recipe.made_it" type="button" id="made-it"
+       class="btn btn-success" value="Made it?"
+       (click)="make()" />
     </div>
     <div class="ml-1"></div>
   </div>

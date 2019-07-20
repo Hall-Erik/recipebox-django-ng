@@ -12,6 +12,7 @@ import { UserService } from '../../services/user.service';
 export class RecipeDetailComponent implements OnInit {
   public recipe: Recipe;
   public owner: boolean = false;
+  public logged_in: boolean = false;
 
   constructor(private recipeService: RecipeService,
               private userService: UserService,
@@ -19,6 +20,7 @@ export class RecipeDetailComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.logged_in = (this.userService.token != null);
     const recipeId = this.route.snapshot.paramMap.get('id');
     this.recipeService.getRecipe(+recipeId).subscribe(
       (recipe) => {
@@ -29,10 +31,24 @@ export class RecipeDetailComponent implements OnInit {
       });
   }
 
+  make() {
+    this.recipeService.makeRecipe(this.recipe.id)
+      .subscribe(() => {
+        this.recipe.made_it = true;
+      });
+  }
+
+  unmake() {
+    this.recipeService.unmakeRecipe(this.recipe.id)
+      .subscribe(() => {
+        this.recipe.made_it = false;
+      });
+  }
+
   delete() {
     if (confirm('Are you sure you want to delete this recipe?')) {
       this.recipeService.deleteRecipe(this.recipe.id)
-        .subscribe((resp) => {
+        .subscribe(() => {
           console.log('Recipe deleted.');
           this.router.navigate(['index']);
         }, (err) => {

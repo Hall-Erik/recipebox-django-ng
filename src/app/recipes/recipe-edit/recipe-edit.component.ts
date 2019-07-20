@@ -29,6 +29,7 @@ export class RecipeEditComponent implements OnInit {
       directions: "",
       image_file: "",
       datePosted: "1/1/19",
+      made_it: false,
       user: null
     };
     this.recipeId = this.route.snapshot.paramMap.get('id');

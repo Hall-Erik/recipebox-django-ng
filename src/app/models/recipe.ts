@@ -11,4 +11,5 @@ export interface Recipe {
     ingredients: string;
     directions: string;
     user: User;
+    made_it: boolean;
 }
