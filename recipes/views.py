@@ -35,13 +35,19 @@ class RecipeRUD(RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
     permission_classes = (IsOwnerOrReadOnly,)
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        user_id = getattr(self.request.user, 'id', None)
+        context.update({'user_id': user_id})
+        return context
+
 
 class MakeRecipeView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         pass
-    
+
     def delete(self, request):
         pass
 

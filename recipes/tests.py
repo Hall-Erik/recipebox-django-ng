@@ -190,6 +190,27 @@ class RecipeRetrieveUpdateDestroyTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
 
+    def test_with_made_recipe(self):
+        '''
+        Recipes made by current user return
+        with made_it attribute set to true.
+        '''
+        owner = User.objects.create_user(username='steve')
+        user = User.objects.create_user(username='bront')
+        client = APIClient()
+        client.force_authenticate(user=user)
+        recipe = Recipe.objects.create(
+            title='stew', description='a nice stew',
+            cook_time='5', servings='12',
+            ingredients='water, beef, celery',
+            directions='cook, eat', user=owner)
+        MadeRecipe.objects.create(recipe=recipe, user=user)
+        url = reverse('recipe_rud', kwargs={'id': recipe.id})
+        response = client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('made_it', response.data)
+        self.assertEqual(response.data['made_it'], True)
+
     def test_anon_cant_update(self):
         '''
         Anon user cannot update recipes.

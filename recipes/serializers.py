@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.serializers import CurrentUserDefault
 from django.contrib.auth.models import User
 from .models import Recipe, MadeRecipe
 
@@ -30,7 +29,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         user_id = self.context.get('user_id')
         if user_id:
             if MadeRecipe.objects.filter(
-                user_id=user_id, recipe_id=obj.id).count() == 1:
+              user_id=user_id, recipe_id=obj.id).count() == 1:
                 return True
         return False
 
