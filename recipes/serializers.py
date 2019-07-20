@@ -1,6 +1,7 @@
 from rest_framework import serializers
+from rest_framework.serializers import CurrentUserDefault
 from django.contrib.auth.models import User
-from .models import Recipe
+from .models import Recipe, MadeRecipe
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -22,16 +23,22 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
-    # user = serializers.HiddenField(
-    #     default=serializers.CurrentUserDefault())
-    # user = serializers.PrimaryKeyRelatedField(
     user = UserSerializer(read_only=True)
+    made_it = serializers.SerializerMethodField('_made_it')
+
+    def _made_it(self, obj):
+        user_id = self.context.get('user_id')
+        if user_id:
+            if MadeRecipe.objects.filter(
+                user_id=user_id, recipe_id=obj.id).count() == 1:
+                return True
+        return False
 
     class Meta:
         model = Recipe
         fields = (
             'id', 'title', 'description', 'cook_time', 'servings',
             'date_posted', 'image_file', 'ingredients', 'directions',
-            'user')
+            'user', 'made_it')
         extra_kwargs = {
             'id': {'read_only': True}}

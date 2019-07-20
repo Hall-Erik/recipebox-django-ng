@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
 from .serializers import RecipeSerializer, UserSerializer
-from .models import Recipe
+from .models import Recipe, MadeRecipe
 
 
 class RegisterUserTests(TestCase):
@@ -77,6 +77,26 @@ class RecipeListCreateTests(TestCase):
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
+
+    def test_with_made_recipe(self):
+        '''
+        Recipes that the current user has made
+        return with an attribute 'made_it' set to true.
+        '''
+        user = User.objects.create_user(username='steve')
+        client = APIClient()
+        client.force_authenticate(user=user)
+        recipe = Recipe.objects.create(
+            title='stew', description='a nice stew',
+            cook_time='5', servings='12',
+            ingredients='water, beef, celery',
+            directions='cook, eat', user=user)
+        MadeRecipe.objects.create(user=user, recipe=recipe)
+        url = reverse('recipe_list_create')
+        response = client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('made_it', response.data[0])
+        self.assertEqual(response.data[0]['made_it'], True)
 
     def test_anon_cant_create_recipe(self):
         '''
