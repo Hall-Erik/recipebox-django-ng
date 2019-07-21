@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import (
@@ -15,11 +13,6 @@ from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 from .models import Recipe, MadeRecipe
 from .serializers import UserSerializer, RecipeSerializer
-
-
-class HomePageView(TemplateView):
-    def get(self, request, **kwargs):
-        return render(request, 'recipes/index.html', context=None)
 
 
 class RecipeListCreate(ListCreateAPIView):
