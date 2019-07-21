@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Recipe Box</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="{% static 'recipes/favicon.ico' %}">
+</head>
+<body>
+  <app-root></app-root>
+  <script type="text/javascript" src="{% static 'recipes/runtime-es2015.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/polyfills-es2015.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/runtime-es5.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/polyfills-es5.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/styles-es2015.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/styles-es5.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/scripts.js' %}"></script>
+  <script type="text/javascript" src="{% static 'recipes/vendor-es2015.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/main-es2015.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/vendor-es5.js' %}" ></script>
+  <script type="text/javascript" src="{% static 'recipes/main-es5.js' %}" ></script>
+</body>
+</html>
