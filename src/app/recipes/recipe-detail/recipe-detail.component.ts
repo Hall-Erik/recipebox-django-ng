@@ -20,13 +20,13 @@ export class RecipeDetailComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.logged_in = (this.userService.token != null);
+    this.logged_in = this.userService.logged_in;
     const recipeId = this.route.snapshot.paramMap.get('id');
     this.recipeService.getRecipe(+recipeId).subscribe(
       (recipe) => {
         this.recipe = recipe
         if (this.userService.user) {
-          this.owner = this.userService.user.id == recipe.user.id;
+          this.owner = this.userService.user.pk == recipe.user.pk;
         }
       });
   }

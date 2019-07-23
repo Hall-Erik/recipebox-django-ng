@@ -20,11 +20,9 @@ export class RegisterComponent {
 
   register() {
     this.userService.register(this.username, this.email, this.password)
-      .subscribe((resp) => {
+      .subscribe(() => {
         console.log('Successfully registered!');
         this.router.navigate(['login']);
-      }, (err) => {
-        console.log('Something went wrong!');
       });
   }
 }

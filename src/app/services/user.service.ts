@@ -10,22 +10,42 @@ import { User } from '../models/user';
 })
 export class UserService {
   private REGISTER_URL = '/api/register/';
-  private LOGIN_URL = '/api/login/';
+  private LOGIN_URL = '/rest-auth/login/';
+  private LOGOUT_URL = '/rest-auth/logout/';
 
   private _user: User;
-  private _token: string;
   private _logged_in = new Subject<boolean>();
 
   constructor(
     private http: HttpClient
   ) { }
 
+  set logged_in(val: boolean) {
+    this._logged_in.next(val);
+  }
+
+  get logged_in(): boolean {
+    return this._user != null;
+  }
+
+  set user(user: User) {
+    this._user = user;
+  }
+
   get user(): User {
     return this._user;
   }
 
-  get token(): string {
-    return this._token;
+  public getUser(): Observable<User> {
+    return this.http.get<User>('/rest-auth/user/')
+      .pipe(map((resp: User) => {
+        this._user = resp;
+        this._logged_in.next(true);
+        return resp;
+      }, () => {
+        this._logged_in.next(false);
+        return null;
+      }));
   }
 
   public login(username: string, password: string): Observable<any> {
@@ -33,12 +53,7 @@ export class UserService {
       username: username,
       password: password
     }).pipe(map((resp: any) => {
-      this._token = resp.token;
-      this.http.get<User>('/api/user/').subscribe((resp) => {
-        console.log('logged in');
-        console.log(resp);
-        this._user = resp;
-        this._logged_in.next(true);
+        this.getUser().subscribe((resp) => {
       });
       return resp;
     }));
@@ -53,9 +68,10 @@ export class UserService {
   }
 
   public logout() {
-    this._logged_in.next(false);
-    this._token = null;
-    this._user = null;
+    return this.http.post(this.LOGOUT_URL, null).pipe(map(() => {
+      this._logged_in.next(false);
+      this._user = null;
+    }));
   }
 
   public isLoggedIn(): Observable<boolean> {

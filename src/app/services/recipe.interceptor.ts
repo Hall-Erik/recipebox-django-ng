@@ -11,13 +11,10 @@ export class RecipeInterceptor implements HttpInterceptor {
     constructor(private userService: UserService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.userService.token != null) {
+        if (this.userService.logged_in) {
             const authReq = req.clone({
-                setHeaders: {
-                    Authorization: `Token ${this.userService.token}`
-                }
+                withCredentials: true
             });
-            console.log('Making authenticated request.');
             req = authReq;
         }
         return next.handle(req);

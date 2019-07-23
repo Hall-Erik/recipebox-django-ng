@@ -39,7 +39,7 @@ export class RecipeEditComponent implements OnInit {
 
   updateRecipe() {
     this.recipeService.updateRecipe(+this.recipeId, this.recipe)
-      .subscribe((resp) => {
+      .subscribe(() => {
         console.log('Recipe updated');
         this.router.navigate(['index']);
       });

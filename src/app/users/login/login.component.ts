@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/user.service';
-
 import { Router } from '@angular/router';
+
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +20,9 @@ export class LoginComponent {
 
   login() {
     this.userService.login(this.username, this.password)
-      .subscribe((resp) => {
+      .subscribe(() => {
         console.log('Sucessfully logged in.');
         this.router.navigate(['index']);
-      }, (err) => {
-        console.log('Something went wrong');
       });
   }
-
 }
