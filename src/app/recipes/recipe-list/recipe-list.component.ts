@@ -9,8 +9,7 @@ import { Recipe } from 'src/app/models/recipe';
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[];
-  selectedRecipe;
-
+  
   constructor(public recipeService: RecipeService) { }
 
   ngOnInit() {

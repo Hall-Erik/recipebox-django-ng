@@ -1,17 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-3 mb-1" *ngFor="let recipe of recipes">
-    <div class="card h-100" routerLink="/recipe/{{recipe.id}}">
-      <div class="card-img-top home-recipe-pic-div">
-        <img *ngIf="recipe.image_file" class="home-recipe-pic" src="{{recipe.image_file}}" />
-        <img *ngIf="!recipe.image_file" class="home-recipe-pic" src="assets/img/default.png" />
-      </div>
-      <div class="card-body">
-        <h4 class="card-title"><a>{{recipe.title}}</a></h4>
-        <small class="card-text text-muted">
-          Author: <a>{{recipe.user.username}}</a>
-        </small>
-        <p class="card-text">{{ recipe.description }}</p>
-      </div>
-    </div>
+    <app-recipe-card [recipe]="recipe"
+    routerLink="/recipe/{{recipe.id}}"></app-recipe-card>
   </div>
 </div>
