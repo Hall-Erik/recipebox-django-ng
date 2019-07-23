@@ -665,9 +665,10 @@ let RecipeInterceptor = class RecipeInterceptor {
     intercept(req, next) {
         if (this.userService.token != null) {
             const authReq = req.clone({
-                setHeaders: {
-                    Authorization: `Token ${this.userService.token}`
-                }
+                withCredentials: true
+                // setHeaders: {
+                //     Authorization: `Token ${this.userService.token}`
+                // }
             });
             console.log('Making authenticated request.');
             req = authReq;
@@ -765,7 +766,8 @@ let UserService = class UserService {
     constructor(http) {
         this.http = http;
         this.REGISTER_URL = '/api/register/';
-        this.LOGIN_URL = '/api/login/';
+        // private LOGIN_URL = '/api/login/';
+        this.LOGIN_URL = '/rest-auth/login/';
         this._logged_in = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     get user() {

@@ -686,9 +686,10 @@ var RecipeInterceptor = /** @class */ (function () {
     RecipeInterceptor.prototype.intercept = function (req, next) {
         if (this.userService.token != null) {
             var authReq = req.clone({
-                setHeaders: {
-                    Authorization: "Token " + this.userService.token
-                }
+                withCredentials: true
+                // setHeaders: {
+                //     Authorization: `Token ${this.userService.token}`
+                // }
             });
             console.log('Making authenticated request.');
             req = authReq;
@@ -788,7 +789,8 @@ var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
         this.REGISTER_URL = '/api/register/';
-        this.LOGIN_URL = '/api/login/';
+        // private LOGIN_URL = '/api/login/';
+        this.LOGIN_URL = '/rest-auth/login/';
         this._logged_in = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     Object.defineProperty(UserService.prototype, "user", {

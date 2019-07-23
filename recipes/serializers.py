@@ -6,10 +6,10 @@ from .models import Recipe, MadeRecipe
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password',)
+        fields = ('pk', 'username', 'email', 'password',)
         extra_kwargs = {
             'password': {'write_only': True},
-            'id': {'read_only': True}}
+            'pk': {'read_only': True}}
 
     def create(self, data):
         user = User(
