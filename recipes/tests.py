@@ -2,9 +2,85 @@ from django.urls import reverse
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
+from rest_auth.serializers import UserDetailsSerializer
 from django.contrib.auth.models import User
-from .serializers import RecipeSerializer, UserSerializer
+from .serializers import RecipeSerializer
 from .models import Recipe, MadeRecipe
+
+
+class LogoutViewTests(TestCase):
+    def test_auth_token_gets_reset_on_logout(self):
+        '''
+        Logout should reset the auth token.
+        '''
+        client = APIClient()
+        user = User.objects.create_user(
+            username='test', email='test@test.com', password='test123')
+        url = '/rest-auth/login/'
+        data = {
+            'email': 'test@test.com',
+            'password': 'test123'}
+        # Login and get the first key
+        response = client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue('key' in response.data)
+        key = response.data['key']
+        # Logout
+        client.force_authenticate(user=user)
+        response = client.post('/rest-auth/logout/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # Login again
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue('key' in response.data)
+        self.assertNotEqual(response.data['key'], key)
+
+
+class LoginViewTests(TestCase):
+    def test_login_works_with_email(self):
+        '''
+        Login should return a token key
+        if given good email/password.
+        '''
+        User.objects.create_user(
+            username='test', email='test@test.com', password='test123')
+        url = '/rest-auth/login/'
+        data = {
+            'email': 'test@test.com',
+            'password': 'test123'}
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue('key' in response.data)
+
+    def test_login_works_with_username(self):
+        '''
+        Login should return a token key
+        if given good username/password.
+        '''
+        User.objects.create_user(
+            username='test', email='test@test.com', password='test123')
+        url = '/rest-auth/login/'
+        data = {
+            'username': 'test',
+            'password': 'test123'}
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue('key' in response.data)
+
+    def test_cant_login_with_bad_creds(self):
+        '''
+        Login should not return a token key
+        if given bad password.
+        '''
+        User.objects.create_user(
+            username='test', email='test@test.com', password='test123')
+        url = '/rest-auth/login/'
+        data = {
+            'username': 'test',
+            'password': 'wrongpwd'}
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertTrue('key' not in response.data)
 
 
 class RegisterUserTests(TestCase):
@@ -28,9 +104,9 @@ class CurrentUserViewTests(TestCase):
         '''
         Anon user cannot access this endpoint.
         '''
-        url = reverse('current_user')
+        url = '/rest-auth/user/'
         response = self.client.get(url, format='json')
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_user_can_access(self):
         '''
@@ -39,10 +115,10 @@ class CurrentUserViewTests(TestCase):
         user = User.objects.create_user(username='steve', email='s@s.com')
         client = APIClient()
         client.force_authenticate(user=user)
-        url = reverse('current_user')
+        url = '/rest-auth/user/'
         response = client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        serializer = UserSerializer(user)
+        serializer = UserDetailsSerializer(user)
         self.assertEqual(response.data, serializer.data)
 
 
@@ -112,7 +188,7 @@ class RecipeListCreateTests(TestCase):
             'ingredients': 'test',
             'directions': 'test'
         }, format='json')
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(Recipe.objects.count(), 0)
 
     def test_create_recipe(self):
@@ -231,7 +307,7 @@ class RecipeRetrieveUpdateDestroyTests(TestCase):
             'ingredients': 'water, beef, celery',
             'directions': 'cook, eat'
         }, format='json')
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(Recipe.objects.get().title, 'stew')
 
     def test_non_owner_cant_update(self):
@@ -295,7 +371,7 @@ class RecipeRetrieveUpdateDestroyTests(TestCase):
             directions='cook, eat', user=user)
         url = reverse('recipe_rud', kwargs={'id': recipe.id})
         response = self.client.delete(url, format='json')
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(Recipe.objects.count(), 1)
 
     def test_non_onwer_cant_destroy(self):
@@ -348,8 +424,8 @@ class MadeRecipeTests(TestCase):
         url = reverse('recipe_make', kwargs={'id': recipe.id})
         make_resp = self.client.post(url, format='json')
         unmake_resp = self.client.delete(url, format='json')
-        self.assertEqual(make_resp.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(unmake_resp.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(make_resp.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(unmake_resp.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_can_make_recipe(self):
         '''
