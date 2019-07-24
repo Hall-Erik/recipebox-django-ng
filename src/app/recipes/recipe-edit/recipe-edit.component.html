@@ -1,63 +1,8 @@
 <div class="container mb-3">
-  <div class="row">
-    <div class="col-sm-8 offset-sm-2 content-section">
-      <h2>Edit Recipe</h2>
-      <form>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input [(ngModel)]="recipe.title" type="text" name="title"
-          class="form-control" id="title" aria-describedby="nameHelp"
-          placeholder="Omelette du Fromage">
-        </div>
-          
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea [(ngModel)]="recipe.description" name="description"
-          class="form-control" id="description" aria-describedby="descHelp"
-          placeholder="This recipe is very good.">
-          </textarea>
-        </div>
-          
-        <div class="form-group">
-          <label for="servings">Servings</label>
-          <input [(ngModel)]="recipe.servings" type="number" name="servings"
-          class="form-control" id="servings" aria-describedby="servingsHelp"
-          placeholder="3-4">
-        </div>
-          
-        <div class="form-group">
-          <label for="cook_time">Cook Time (minutes)</label>
-          <input [(ngModel)]="recipe.cook_time" type="number" name="cook_time"
-          class="form-control" id="cook_time" aria-describedby="cook_timeHelp"
-          placeholder="35">
-        </div>
-          
-        <div class="form-group">
-          <label for="ingredients">Ingredients</label>
-          <textarea [(ngModel)]="recipe.ingredients" name="ingredients"
-          class="form-control" id="ingredients" aria-describedby="descHelp"
-          rows="5"
-          placeholder="1 egg&#10;3/4 cup milk">
-          </textarea>
-        </div>
-          
-        <div class="form-group">
-          <label for="directions">Directions</label>
-          <textarea [(ngModel)]="recipe.directions" name="directions"
-          class="form-control" id="directions" aria-describedby="descHelp"
-          rows="5"
-          placeholder="Prepare food.&#10;Cook food.">
-          </textarea>
-        </div>
-          
-        <div class="form-group">
-          <label for="image_file">Image URL</label>
-          <input [(ngModel)]="recipe.image_file" type="text" name="image_file"
-          class="form-control" id="image_file" aria-describedby="nameHelp"
-          placeholder="https://imageco.com/1234.png">
-        </div>
-        </form>
-        <button class="btn btn-outline-info" (click)="updateRecipe()">Save</button>
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2 content-section">
+        <h2>Edit Recipe</h2>
+        <app-recipe-form [recipe]="recipe" (recipeSubmit)="update($event)"></app-recipe-form>
+      </div>
     </div>
   </div>
-</div>

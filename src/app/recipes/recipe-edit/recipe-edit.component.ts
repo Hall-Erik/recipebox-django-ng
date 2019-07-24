@@ -19,28 +19,14 @@ export class RecipeEditComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.recipe = {
-      id: null,
-      title: "",
-      description: "",
-      servings: "",
-      cook_time: "",
-      ingredients: "",
-      directions: "",
-      image_file: "",
-      datePosted: "1/1/19",
-      made_it: false,
-      user: null
-    };
     this.recipeId = this.route.snapshot.paramMap.get('id');
     this.recipeService.getRecipe(+this.recipeId).subscribe(
       (recipe) => {this.recipe = recipe});
   }
 
-  updateRecipe() {
-    this.recipeService.updateRecipe(+this.recipeId, this.recipe)
+  update(recipe) {
+    this.recipeService.updateRecipe(+this.recipeId, recipe)
       .subscribe(() => {
-        console.log('Recipe updated');
         this.router.navigate(['index']);
       });
   }
