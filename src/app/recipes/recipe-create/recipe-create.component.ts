@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from 'src/app/models/recipe';
 
@@ -9,36 +10,39 @@ import { Recipe } from 'src/app/models/recipe';
   styleUrls: ['./recipe-create.component.css']
 })
 export class RecipeCreateComponent implements OnInit {
-  public recipe: Recipe;
-  
+  private recipeForm = this.fb.group({
+    title: ['', Validators.required],
+    description: [''],
+    servings: ['', Validators.required],
+    cook_time: ['', Validators.required],
+    ingredients: ['', Validators.required],
+    directions: ['', Validators.required],
+    image_file: ['']
+  });
+
   constructor(
+    private fb: FormBuilder,
     public recipeService: RecipeService,
     private router: Router) { }
 
   ngOnInit() {
-    this.initRecipe();
   }
 
-  initRecipe() {
-    this.recipe = {
-      id: null,
-      title: "",
-      description: "",
-      servings: "",
-      cook_time: "",
-      ingredients: "",
-      directions: "",
-      image_file: "",
-      datePosted: "1/1/19",
-      made_it: false,
-      user: null
-    };
-  }
+  get title() { return this.recipeForm.get('title'); }
+  get description() { return this.recipeForm.get('description'); }
+  get servings() { return this.recipeForm.get('servings'); }
+  get cook_time() { return this.recipeForm.get('cook_time'); }
+  get ingredients() { return this.recipeForm.get('ingredients'); }
+  get directions() { return this.recipeForm.get('directions'); }
+  get image_file() { return this.recipeForm.get('image_file'); }
 
-  createRecipe() {
-    this.recipeService.createRecipe(this.recipe)
-      .subscribe((result: any) => {
+  onSubmit() {
+    this.recipeService.createRecipe(
+      new Recipe(this.recipeForm.value))
+      .subscribe(() => {
         this.router.navigate(['index']);
+      }, (err) => {
+        console.log(err);
       });
   }
 }

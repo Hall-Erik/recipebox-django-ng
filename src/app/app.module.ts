@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
@@ -35,6 +35,7 @@ import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',
