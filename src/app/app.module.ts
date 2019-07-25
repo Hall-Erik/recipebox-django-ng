@@ -5,6 +5,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+
 import { AppComponent } from './app.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeCreateComponent } from './recipes/recipe-create/recipe-create.component';
@@ -42,7 +44,8 @@ import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',
       headerName: 'X-CSRFToken'
-    })
+    }),
+    Ng2ImgMaxModule
   ],
   providers: [
     RecipeService,

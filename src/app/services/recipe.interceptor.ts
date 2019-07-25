@@ -11,7 +11,7 @@ export class RecipeInterceptor implements HttpInterceptor {
     constructor(private userService: UserService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.userService.logged_in) {
+        if (this.userService.logged_in && req.url != 'https://flask-recipebox.s3.amazonaws.com/') {
             const authReq = req.clone({
                 withCredentials: true
             });
