@@ -8,6 +8,11 @@ The Angular frontend can be found [here](https://github.com/Hall-Erik/recipebox-
 
 Download and run `python manage.py migrate` to build a SQLite database.
 
+Download the dependencies with `pip install -r requirements.txt`.
+
+You'll need an AWS account and S3 bucket set up for image uploads.
+Then set some environment variables for `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `S3_BUCKET`.
+
 Run `python manage.py runserver` for a dev server. The app will automatically reload if you change any of the source files.
 
 ## Running unit tests

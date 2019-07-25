@@ -5,6 +5,7 @@ from . import views
 
 
 urlpatterns = [
+    path('api/sign_s3/', views.SignS3View.as_view(), name='sign_s3'),
     path('api/recipes/',
          views.RecipeListCreate.as_view(), name='recipe_list_create'),
     path('api/recipes/<id>', views.RecipeRUD.as_view(), name='recipe_rud'),

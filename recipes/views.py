@@ -9,10 +9,42 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly)
 from rest_framework import status
+import boto3
 from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 from .models import Recipe, MadeRecipe
 from .serializers import UserSerializer, RecipeSerializer
+from recipebox import settings
+
+
+class SignS3View(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        S3_BUCKET = settings.S3_BUCKET
+
+        file_name = request.data.get('file_name')
+        file_type = request.data.get('file_type')
+
+        s3 = boto3.client('s3')
+
+        presigned_post = s3.generate_presigned_post(
+            Bucket = S3_BUCKET,
+            Key = file_name,
+            Fields = {"acl": "public-read", "Content-Type": file_type},
+            Conditions = [
+            {"acl": "public-read"},
+            {"Content-Type": file_type}
+            ],
+            ExpiresIn = 3600
+        )
+
+        data = {
+            'data': presigned_post,
+            'url': 'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, file_name)
+        }
+
+        return Response(data=data)
 
 
 class RecipeListCreate(ListCreateAPIView):

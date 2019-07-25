@@ -129,3 +129,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication'
     ],
 }
+
+S3_BUCKET = os.environ.get('S3_BUCKET_NAME')
