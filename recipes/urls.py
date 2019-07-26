@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/register/', views.RegisterView.as_view(), name='api_register'),
     path('api/user/', views.CurrentUserView.as_view(), name='current_user'),
     url(r'rest-auth/', include('rest_auth.urls')),
+    url(r'^', include('django.contrib.auth.urls')),
     url(r'^.*',
         TemplateView.as_view(template_name='recipes/index.html'), name='home'),
 ]
