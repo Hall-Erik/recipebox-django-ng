@@ -21,6 +21,8 @@ import { UserService } from './services/user.service';
 import { RecipeInterceptor } from './services/recipe.interceptor';
 import { RecipeCardComponent } from './recipes/recipe-card/recipe-card.component';
 import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component';
+import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component
     LoginComponent,
     RecipeEditComponent,
     RecipeCardComponent,
-    RecipeFormComponent
+    RecipeFormComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

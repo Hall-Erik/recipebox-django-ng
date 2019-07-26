@@ -6,6 +6,8 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RegisterComponent } from './users/register/register.component';
 import { LoginComponent } from './users/login/login.component';
+import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "index"},
@@ -14,6 +16,8 @@ const routes: Routes = [
   {path: "recipe/:id", component: RecipeDetailComponent},
   {path: "recipe/:id/edit", component: RecipeEditComponent},
   {path: "login", component: LoginComponent},
+  {path: "forgot-password", component: ForgotPasswordComponent},
+  {path: "reset/:uid/:token", component: ResetPasswordComponent},
   {path: "register", component: RegisterComponent}
 ];
 
