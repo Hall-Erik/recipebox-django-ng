@@ -29,14 +29,14 @@ class SignS3View(APIView):
         s3 = boto3.client('s3')
 
         presigned_post = s3.generate_presigned_post(
-            Bucket = S3_BUCKET,
-            Key = file_name,
-            Fields = {"acl": "public-read", "Content-Type": file_type},
-            Conditions = [
-            {"acl": "public-read"},
-            {"Content-Type": file_type}
+            Bucket=S3_BUCKET,
+            Key=file_name,
+            Fields={"acl": "public-read", "Content-Type": file_type},
+            Conditions=[
+                {"acl": "public-read"},
+                {"Content-Type": file_type}
             ],
-            ExpiresIn = 3600
+            ExpiresIn=3600
         )
 
         data = {
