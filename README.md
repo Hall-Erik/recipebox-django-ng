@@ -13,6 +13,8 @@ Download the dependencies with `pip install -r requirements.txt`.
 You'll need an AWS account and S3 bucket set up for image uploads.
 Then set some environment variables for `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `S3_BUCKET`.
 
+You will need a Sendgrid account to get the email backend working. Follow directons on their website to get an api key for sending mail via SMTP and set environment variables for `SENDGRID_USER` and `SENDGRID_PASS`.
+
 Run `python manage.py runserver` for a dev server. The app will automatically reload if you change any of the source files.
 
 ## Running unit tests
