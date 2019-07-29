@@ -10,8 +10,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-  private reset: boolean = false;
-  private resetForm = this.fb.group({
+  public reset: boolean = false;
+  public resetForm = this.fb.group({
     uid: '',
     token: '',
     password1: ['', Validators.required],

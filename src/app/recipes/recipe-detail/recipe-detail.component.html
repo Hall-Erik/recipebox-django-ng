@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-sm-12 col-md-3">
       <img *ngIf="recipe.image_file" class="recipe-pic" src="{{recipe.image_file}}" />
-      <img *ngIf="!recipe.image_file" class="recipe-pic" src="assets/img/default.png" />
+      <img *ngIf="!recipe.image_file" class="recipe-pic" src="https://flask-recipebox.s3-us-west-1.amazonaws.com/default.png" />
     </div>
     <div class="col-sm-12 col-md-9">
       <div class="row">

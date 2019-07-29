@@ -43,25 +43,25 @@
         </div>
 
         <div class="form-group">
-            <label for="confirmpassword">Confirm Password</label>
+            <label for="confirmPassword">Confirm Password</label>
             <input type="password"
                   class="form-control"
                   required
                   pattern="{{passwordField.value}}"
-                  name="confirmpassword"
-                  #confirmpasswordField="ngModel"
-                  [(ngModel)]="confirmpassword">
-            <div *ngIf="confirmpasswordField.errors && confirmpasswordField.touched">
-              <div *ngIf="confirmpasswordField.errors.required">
+                  name="confirmPassword"
+                  #confirmPasswordField="ngModel"
+                  [(ngModel)]="confirmPassword">
+            <div *ngIf="confirmPasswordField.errors && confirmPasswordField.touched">
+              <div *ngIf="confirmPasswordField.errors.required">
                 <small>This field is required</small>
               </div>
-              <div *ngIf="confirmpasswordField.errors.pattern">
+              <div *ngIf="confirmPasswordField.errors.pattern">
                 <small>Password and Confirm Password must match</small>
               </div>
             </div>
           </div>
 
-        <button type="submit">Register</button>          
+        <button class="btn btn-outline-info" type="submit">Register</button>          
       </form>
       <small>Already have an account? Go <a routerLink="/login">here</a> to log in.</small>
     </div>

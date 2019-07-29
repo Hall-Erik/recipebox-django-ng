@@ -21,7 +21,7 @@ export class RecipeFormComponent {
     }
   }
 
-  private recipeForm = this.fb.group({
+  public recipeForm = this.fb.group({
     title: ['', Validators.required],
     description: [''],
     servings: ['', Validators.required],
@@ -32,7 +32,7 @@ export class RecipeFormComponent {
   });
 
   private img: File;
-  private img_preview;
+  public img_preview;
 
   constructor(
     private fb: FormBuilder,
@@ -83,8 +83,10 @@ export class RecipeFormComponent {
 
   // get a signed request for uploading to S3
   get_signed_request(file: File) {
+    let ext = file.name.split('.').pop();
+    let f_name = Date.now() + '.' + ext;
     this.http.post("/api/sign_s3/", {
-      "file_name": file.name,
+      "file_name": f_name,
       "file_type": file.type
     }).subscribe((resp) => {
       this.upload_to_s3(file, resp['data'], resp['url']);
@@ -94,14 +96,14 @@ export class RecipeFormComponent {
   // upload the image to S3
   upload_to_s3(file: File, s3Data, url: string) {
     var postData = new FormData();
+    console.log('S3Data: ', s3Data);
     for (let key in s3Data.fields) {
       postData.append(key, s3Data.fields[key]);
     }
     postData.append('file', file);
-
+    
     this.http.post(s3Data.url, postData)
       .subscribe(() => {
-        console.log('Posted to s3.');
         this.img_preview = url;
         this.image_file.setValue(url);
       });

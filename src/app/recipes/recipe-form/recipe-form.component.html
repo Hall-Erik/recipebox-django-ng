@@ -61,7 +61,7 @@
     <img *ngIf="img_preview"
     [src]="sanitizer.bypassSecurityTrustUrl(img_preview)">
     <img *ngIf="!img_preview"
-    src="assets/img/default.png">
+    src="https://flask-recipebox.s3-us-west-1.amazonaws.com/default.png">
     <br>
   </div>
 

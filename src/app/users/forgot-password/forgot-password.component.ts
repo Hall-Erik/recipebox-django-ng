@@ -9,8 +9,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent {
-  private sent: boolean = false;
-  private email: FormControl = new FormControl('', [Validators.required, Validators.email]);
+  public sent: boolean = false;
+  public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(private userService: UserService) { }
 
