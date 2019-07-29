@@ -111,6 +111,17 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-6 col-md-
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/users/forgot-password/forgot-password.component.html":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/users/forgot-password/forgot-password.component.html ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container mb-3\">\n  <div class=\"row\">\n    <div class=\"col-sm-8 offset-sm-2 content-section\">\n      <h2>Reset Password</h2>\n      <form *ngIf=\"!sent\" (ngSubmit)=\"send_request()\">\n        <div class=\"form-group\">\n          <label for=\"email\">Email</label>\n          <input type=\"text\" [formControl]=\"email\"\n          class=\"form-control\" placeholder=\"user@example.com\"\n          [ngClass]=\"{'is-invalid': email.invalid && email.touched}\">\n          <div class=\"form-errors\"\n          *ngIf=\"email.invalid && email.touched\">\n            <small>\n              <p *ngIf=\"email.errors.required\">This field is required.</p>\n              <p *ngIf=\"email.errors.email\">Must be a valid email address.</p>\n            </small>\n          </div>\n        </div>\n\n        <button class=\"btn btn-outline-info\"\n        type=\"submit\" [disabled]=\"!email.valid\">Send</button>\n      </form>\n      <div *ngIf=\"sent\">\n        <p>An email has been sent with instructions for resetting your password.</p>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/users/login/login.component.html":
 /*!****************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/users/login/login.component.html ***!
@@ -118,7 +129,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-6 col-md-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mb-3\">\n  <div class=\"row\">\n    <div class=\"col-sm-8 offset-sm-2 content-section\">\n      <h2>Login</h2>\n      <form (ngSubmit)=\"login()\">\n        <div class=\"form-group\">\n          <label for=\"username\">Username</label>\n          <input type=\"text\"\n                class=\"form-control\"\n                required\n                name=\"username\"\n                #usernameField=\"ngModel\"\n                [(ngModel)]=\"username\">\n          <div *ngIf=\"usernameField.errors && usernameField.errors.required\">\n            <small>Username is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\"\n                class=\"form-control\"\n                required\n                name=\"password\"\n                #passwordField=\"ngModel\"\n                [(ngModel)]=\"password\">\n          <div *ngIf=\"passwordField.errors && passwordField.errors.required\">\n            <small>Password is Mandatory</small>\n          </div>\n        </div>\n\n        <button type=\"submit\">Login</button>\n      </form>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container mb-3\">\n  <div class=\"row\">\n    <div class=\"col-sm-8 offset-sm-2 content-section\">\n      <h2>Login</h2>\n      <form (ngSubmit)=\"login()\">\n        <div class=\"form-group\">\n          <label for=\"username\">Username</label>\n          <input type=\"text\"\n                class=\"form-control\"\n                required\n                name=\"username\"\n                #usernameField=\"ngModel\"\n                [(ngModel)]=\"username\">\n          <div *ngIf=\"usernameField.errors && usernameField.errors.required\">\n            <small>Username is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\"\n                class=\"form-control\"\n                required\n                name=\"password\"\n                #passwordField=\"ngModel\"\n                [(ngModel)]=\"password\">\n          <div *ngIf=\"passwordField.errors && passwordField.errors.required\">\n            <small>Password is Mandatory</small>\n          </div>\n        </div>\n\n        <button type=\"submit\">Login</button>\n      </form>\n      <small>Forgot your password? Click <a routerLink=\"/forgot-password\">here</a> to request a new one.</small>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -129,7 +140,18 @@ module.exports = "<div class=\"container mb-3\">\n  <div class=\"row\">\n    <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mb-3\">\n  <div class=\"row\">\n    <div class=\"col-sm-8 offset-sm-2 content-section\">\n      <h2>Register</h2>\n      <form (ngSubmit)=\"register()\">\n        <div class=\"form-group\">\n          <label for=\"username\">Username</label>\n          <input type=\"text\"\n                 class=\"form-control\"\n                 required\n                 name=\"username\"\n                 #usernameField=\"ngModel\"\n                 [(ngModel)]=\"username\">\n          <div *ngIf=\"usernameField.errors && usernameField.errors.required\">\n            <small>Username is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"email\">Email</label>\n          <input type=\"text\"\n                  class=\"form-control\"\n                  required\n                  name=\"email\"\n                  #emailField=\"ngModel\"\n                  [(ngModel)]=\"email\">\n          <div *ngIf=\"emailField.errors && emailField.errors.required\">\n            <small>Email is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\"\n                class=\"form-control\"\n                required\n                name=\"password\"\n                #passwordField=\"ngModel\"\n                [(ngModel)]=\"password\">\n          <div *ngIf=\"passwordField.errors && passwordField.errors.required\">\n            <small>Password is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"confirmpassword\">Confirm Password</label>\n            <input type=\"password\"\n                  class=\"form-control\"\n                  required\n                  pattern=\"{{passwordField.value}}\"\n                  name=\"confirmpassword\"\n                  #confirmpasswordField=\"ngModel\"\n                  [(ngModel)]=\"confirmpassword\">\n            <div *ngIf=\"confirmpasswordField.errors && confirmpasswordField.touched\">\n              <div *ngIf=\"confirmpasswordField.errors.required\">\n                <small>This field is required</small>\n              </div>\n              <div *ngIf=\"confirmpasswordField.errors.pattern\">\n                <small>Password and Confirm Password must match</small>\n              </div>\n            </div>\n          </div>\n\n        <button type=\"submit\">Register</button>          \n      </form>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container mb-3\">\n  <div class=\"row\">\n    <div class=\"col-sm-8 offset-sm-2 content-section\">\n      <h2>Register</h2>\n      <form (ngSubmit)=\"register()\">\n        <div class=\"form-group\">\n          <label for=\"username\">Username</label>\n          <input type=\"text\"\n                 class=\"form-control\"\n                 required\n                 name=\"username\"\n                 #usernameField=\"ngModel\"\n                 [(ngModel)]=\"username\">\n          <div *ngIf=\"usernameField.errors && usernameField.errors.required\">\n            <small>Username is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"email\">Email</label>\n          <input type=\"text\"\n                  class=\"form-control\"\n                  required\n                  name=\"email\"\n                  #emailField=\"ngModel\"\n                  [(ngModel)]=\"email\">\n          <div *ngIf=\"emailField.errors && emailField.errors.required\">\n            <small>Email is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\"\n                class=\"form-control\"\n                required\n                name=\"password\"\n                #passwordField=\"ngModel\"\n                [(ngModel)]=\"password\">\n          <div *ngIf=\"passwordField.errors && passwordField.errors.required\">\n            <small>Password is Mandatory</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"confirmpassword\">Confirm Password</label>\n            <input type=\"password\"\n                  class=\"form-control\"\n                  required\n                  pattern=\"{{passwordField.value}}\"\n                  name=\"confirmpassword\"\n                  #confirmpasswordField=\"ngModel\"\n                  [(ngModel)]=\"confirmpassword\">\n            <div *ngIf=\"confirmpasswordField.errors && confirmpasswordField.touched\">\n              <div *ngIf=\"confirmpasswordField.errors.required\">\n                <small>This field is required</small>\n              </div>\n              <div *ngIf=\"confirmpasswordField.errors.pattern\">\n                <small>Password and Confirm Password must match</small>\n              </div>\n            </div>\n          </div>\n\n        <button type=\"submit\">Register</button>          \n      </form>\n      <small>Already have an account? Go <a routerLink=\"/login\">here</a> to log in.</small>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/users/reset-password/reset-password.component.html":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/users/reset-password/reset-password.component.html ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container mb-3\">\n  <div class=\"row\">\n    <div class=\"col-sm-8 offset-sm-2 content-section\">\n      <h2>Reset Password</h2>\n      <form *ngIf=\"!reset\" [formGroup]=\"resetForm\" (ngSubmit)=\"reset_password()\">\n        <div class=\"form-group\">\n          <label for=\"password1\">Password</label>\n          <input type=\"password\" formControlName=\"password1\" class=\"form-control\"\n          [ngClass]=\"{\n            'is-invalid': password1.invalid && password1.touched,\n            'is-invalid': password1.touched && password2.touched && resetForm.invalid}\">\n          <div class=\"form-errors\"\n          *ngIf=\"password1.invalid && password1.touched\">\n            <small>\n              <p *ngIf=\"password1.errors.required\">This field is required.</p>\n            </small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"password2\">Confirm Password</label>\n          <input type=\"password\" formControlName=\"password2\" class=\"form-control\"\n          [ngClass]=\"{\n            'is-invalid': password2.invalid && password2.touched,\n            'is-invalid': password1.touched && password2.touched && resetForm.invalid}\">\n          <div class=\"form-errors\"\n          *ngIf=\"password2.invalid && password2.touched\">\n            <small>\n              <p *ngIf=\"password2.errors.required\">This field is required.</p>\n            </small>\n          </div>\n        </div>\n\n        <div class=\"form-group form-errors\"\n        *ngIf=\"password1.value != password2.value && password1.touched && password2.touched\">\n        <small>Passwords do not match</small>  \n        </div>\n\n        <button class=\"btn btn-outline-info\" type=\"submit\"\n        [disabled]=\"!resetForm.valid\">Send</button>\n      </form>\n      <div *ngIf=\"reset\">\n        <p>Your password has been reset. You can now <a routerLink=\"/login\">Log in</a>.</p>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -152,6 +174,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _recipes_recipe_edit_recipe_edit_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./recipes/recipe-edit/recipe-edit.component */ "./src/app/recipes/recipe-edit/recipe-edit.component.ts");
 /* harmony import */ var _users_register_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./users/register/register.component */ "./src/app/users/register/register.component.ts");
 /* harmony import */ var _users_login_login_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./users/login/login.component */ "./src/app/users/login/login.component.ts");
+/* harmony import */ var _users_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./users/forgot-password/forgot-password.component */ "./src/app/users/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _users_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./users/reset-password/reset-password.component */ "./src/app/users/reset-password/reset-password.component.ts");
+
+
 
 
 
@@ -168,6 +194,8 @@ const routes = [
     { path: "recipe/:id", component: _recipes_recipe_detail_recipe_detail_component__WEBPACK_IMPORTED_MODULE_5__["RecipeDetailComponent"] },
     { path: "recipe/:id/edit", component: _recipes_recipe_edit_recipe_edit_component__WEBPACK_IMPORTED_MODULE_6__["RecipeEditComponent"] },
     { path: "login", component: _users_login_login_component__WEBPACK_IMPORTED_MODULE_8__["LoginComponent"] },
+    { path: "forgot-password", component: _users_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_9__["ForgotPasswordComponent"] },
+    { path: "reset/:uid/:token", component: _users_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_10__["ResetPasswordComponent"] },
     { path: "register", component: _users_register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -266,6 +294,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_recipe_interceptor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/recipe.interceptor */ "./src/app/services/recipe.interceptor.ts");
 /* harmony import */ var _recipes_recipe_card_recipe_card_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./recipes/recipe-card/recipe-card.component */ "./src/app/recipes/recipe-card/recipe-card.component.ts");
 /* harmony import */ var _recipes_recipe_form_recipe_form_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./recipes/recipe-form/recipe-form.component */ "./src/app/recipes/recipe-form/recipe-form.component.ts");
+/* harmony import */ var _users_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./users/forgot-password/forgot-password.component */ "./src/app/users/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _users_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./users/reset-password/reset-password.component */ "./src/app/users/reset-password/reset-password.component.ts");
+
+
 
 
 
@@ -301,7 +333,9 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _users_login_login_component__WEBPACK_IMPORTED_MODULE_13__["LoginComponent"],
             _recipes_recipe_edit_recipe_edit_component__WEBPACK_IMPORTED_MODULE_14__["RecipeEditComponent"],
             _recipes_recipe_card_recipe_card_component__WEBPACK_IMPORTED_MODULE_18__["RecipeCardComponent"],
-            _recipes_recipe_form_recipe_form_component__WEBPACK_IMPORTED_MODULE_19__["RecipeFormComponent"]
+            _recipes_recipe_form_recipe_form_component__WEBPACK_IMPORTED_MODULE_19__["RecipeFormComponent"],
+            _users_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_20__["ForgotPasswordComponent"],
+            _users_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_21__["ResetPasswordComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -688,7 +722,7 @@ RecipeEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3JlY2lwZXMvcmVjaXBlLWZvcm0vcmVjaXBlLWZvcm0uY29tcG9uZW50LmNzcyJ9 */"
+module.exports = ".form-errors {\r\n    color: red;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVjaXBlcy9yZWNpcGUtZm9ybS9yZWNpcGUtZm9ybS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksVUFBVTtBQUNkIiwiZmlsZSI6InNyYy9hcHAvcmVjaXBlcy9yZWNpcGUtZm9ybS9yZWNpcGUtZm9ybS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZvcm0tZXJyb3JzIHtcclxuICAgIGNvbG9yOiByZWQ7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -1000,6 +1034,9 @@ let UserService = class UserService {
         this.http = http;
         this.REGISTER_URL = '/api/register/';
         this.LOGIN_URL = '/rest-auth/login/';
+        this.RESET_REQUEST_URL = '/rest-auth/password/reset/';
+        this.RESET_PWD_URL = '/rest-auth/password/reset/confirm/';
+        this.CHANGE_PWD_URL = 'rest-auth/password/change/';
         this.LOGOUT_URL = '/rest-auth/logout/';
         this._logged_in = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
@@ -1031,10 +1068,27 @@ let UserService = class UserService {
             username: username,
             password: password
         }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((resp) => {
-            this.getUser().subscribe((resp) => {
-            });
+            this.getUser().subscribe();
             return resp;
         }));
+    }
+    request_reset(email) {
+        return this.http.post(this.RESET_REQUEST_URL, { email: email });
+    }
+    reset_password(uid, token, password1, password2) {
+        return this.http.post(this.RESET_PWD_URL, {
+            uid: uid,
+            token: token,
+            new_password1: password1,
+            new_password2: password2
+        });
+    }
+    change_password(old_password, new_password1, new_password2) {
+        return this.http.post(this.CHANGE_PWD_URL, {
+            old_password: old_password,
+            new_password1: new_password1,
+            new_password2: new_password2
+        });
     }
     register(username, email, password) {
         return this.http.post(this.REGISTER_URL, {
@@ -1061,6 +1115,65 @@ UserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providedIn: 'root'
     })
 ], UserService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/users/forgot-password/forgot-password.component.css":
+/*!*********************************************************************!*\
+  !*** ./src/app/users/forgot-password/forgot-password.component.css ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".form-errors {\r\n    color: red;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlcnMvZm9yZ290LXBhc3N3b3JkL2ZvcmdvdC1wYXNzd29yZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksVUFBVTtBQUNkIiwiZmlsZSI6InNyYy9hcHAvdXNlcnMvZm9yZ290LXBhc3N3b3JkL2ZvcmdvdC1wYXNzd29yZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZvcm0tZXJyb3JzIHtcclxuICAgIGNvbG9yOiByZWQ7XHJcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/users/forgot-password/forgot-password.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/users/forgot-password/forgot-password.component.ts ***!
+  \********************************************************************/
+/*! exports provided: ForgotPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForgotPasswordComponent", function() { return ForgotPasswordComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+let ForgotPasswordComponent = class ForgotPasswordComponent {
+    constructor(userService) {
+        this.userService = userService;
+        this.sent = false;
+        this.email = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+    }
+    send_request() {
+        this.userService.request_reset(this.email.value)
+            .subscribe((resp) => {
+            if (resp['detail'] === 'Password reset e-mail has been sent.') {
+                this.sent = true;
+            }
+        });
+    }
+};
+ForgotPasswordComponent.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] }
+];
+ForgotPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-forgot-password',
+        template: __webpack_require__(/*! raw-loader!./forgot-password.component.html */ "./node_modules/raw-loader/index.js!./src/app/users/forgot-password/forgot-password.component.html"),
+        styles: [__webpack_require__(/*! ./forgot-password.component.css */ "./src/app/users/forgot-password/forgot-password.component.css")]
+    })
+], ForgotPasswordComponent);
 
 
 
@@ -1182,6 +1295,89 @@ RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/users/register/register.component.css")]
     })
 ], RegisterComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/users/reset-password/reset-password.component.css":
+/*!*******************************************************************!*\
+  !*** ./src/app/users/reset-password/reset-password.component.css ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".form-errors {\r\n    color: red;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlcnMvcmVzZXQtcGFzc3dvcmQvcmVzZXQtcGFzc3dvcmQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFVBQVU7QUFDZCIsImZpbGUiOiJzcmMvYXBwL3VzZXJzL3Jlc2V0LXBhc3N3b3JkL3Jlc2V0LXBhc3N3b3JkLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZm9ybS1lcnJvcnMge1xyXG4gICAgY29sb3I6IHJlZDtcclxufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/users/reset-password/reset-password.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/users/reset-password/reset-password.component.ts ***!
+  \******************************************************************/
+/*! exports provided: ResetPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordComponent", function() { return ResetPasswordComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+
+let ResetPasswordComponent = class ResetPasswordComponent {
+    constructor(userService, fb, route) {
+        this.userService = userService;
+        this.fb = fb;
+        this.route = route;
+        this.reset = false;
+        this.resetForm = this.fb.group({
+            uid: '',
+            token: '',
+            password1: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            password2: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+        }, { validator: this.passwords_match });
+    }
+    get uid() { return this.resetForm.get('uid'); }
+    get token() { return this.resetForm.get('token'); }
+    get password1() { return this.resetForm.get('password1'); }
+    get password2() { return this.resetForm.get('password2'); }
+    ngOnInit() {
+        this.uid.setValue(this.route.snapshot.paramMap.get('uid'));
+        this.token.setValue(this.route.snapshot.paramMap.get('token'));
+    }
+    passwords_match(c) {
+        if (c.get('password1').value !== c.get('password2').value) {
+            return { invalid: true };
+        }
+    }
+    reset_password() {
+        this.userService.reset_password(this.uid.value, this.token.value, this.password1.value, this.password2.value)
+            .subscribe((resp) => {
+            if (resp['detail'] === 'Password has been reset with the new password.') {
+                this.reset = true;
+            }
+        });
+    }
+};
+ResetPasswordComponent.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+];
+ResetPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-reset-password',
+        template: __webpack_require__(/*! raw-loader!./reset-password.component.html */ "./node_modules/raw-loader/index.js!./src/app/users/reset-password/reset-password.component.html"),
+        styles: [__webpack_require__(/*! ./reset-password.component.css */ "./src/app/users/reset-password/reset-password.component.css")]
+    })
+], ResetPasswordComponent);
 
 
 
