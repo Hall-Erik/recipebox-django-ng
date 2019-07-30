@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   public logged_in: boolean = false;
     
   constructor(
-    private userService: UserService,
+    public userService: UserService,
     private alertService: AlertService,
     private router: Router
   ) { }
