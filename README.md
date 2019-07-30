@@ -4,6 +4,8 @@ A recipe sharing app built in Django and Angular. This will be similar to the ve
 
 The Angular frontend can be found [here](https://github.com/Hall-Erik/recipebox-frontend)
 
+This project is live on Heroku [here](https://drf-recipebox.herokuapp.com)
+
 ## Development server
 
 Download and run `python manage.py migrate` to build a SQLite database.
