@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RecipeService } from '../../services/recipe.service';
+
 import { Recipe } from 'src/app/models/recipe';
+
+import { RecipeService } from '../../services/recipe.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-recipe-create',
@@ -10,13 +13,15 @@ import { Recipe } from 'src/app/models/recipe';
 })
 export class RecipeCreateComponent {
   constructor(
-    public recipeService: RecipeService,
+    private recipeService: RecipeService,
+    private alertService: AlertService,
     private router: Router) { }
 
   submit(recipe: Recipe) {
     this.recipeService.createRecipe(recipe)
       .subscribe(() => {
         this.router.navigate(['index']);
+        this.alertService.success('Recipe created.');
       });
   }
 }

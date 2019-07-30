@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from 'src/app/models/recipe';
+
+import { RecipeService } from '../../services/recipe.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -14,7 +16,8 @@ export class RecipeEditComponent implements OnInit {
   private recipeId: string;
 
   constructor(
-    public recipeService: RecipeService,
+    private recipeService: RecipeService,
+    private alertService: AlertService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -28,6 +31,7 @@ export class RecipeEditComponent implements OnInit {
     this.recipeService.updateRecipe(+this.recipeId, recipe)
       .subscribe(() => {
         this.router.navigate(['index']);
+        this.alertService.success('Recipe updated.');
       });
   }
 }

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { Recipe } from '../../models/recipe';
+
 import { RecipeService } from '../../services/recipe.service';
 import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,6 +19,7 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
               private userService: UserService,
+              private alertService: AlertService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -49,10 +53,8 @@ export class RecipeDetailComponent implements OnInit {
     if (confirm('Are you sure you want to delete this recipe?')) {
       this.recipeService.deleteRecipe(this.recipe.id)
         .subscribe(() => {
-          console.log('Recipe deleted.');
           this.router.navigate(['index']);
-        }, (err) => {
-          console.log(err.error.msg);
+          this.alertService.success('Recipe deleted.');
         });
     }
   }

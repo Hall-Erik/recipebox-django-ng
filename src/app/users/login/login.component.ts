@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+
 import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent {
 
   constructor(
     private userService: UserService,
+    private alertService: AlertService,
     private router: Router,
     private fb: FormBuilder
   ) { }
@@ -27,8 +30,9 @@ export class LoginComponent {
     this.userService.login(this.username.value, this.password.value)
       .subscribe(() => {
         this.router.navigate(['index']);
+        this.alertService.success('Logged in successfully.');
       }, () => {
-        // do something couldn't log in
+        this.alertService.error('Could not log. Check your username and password and try again.');
       });
   }
 }

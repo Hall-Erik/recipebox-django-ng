@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { UserService } from '../services/user.service';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,8 @@ export class HeaderComponent implements OnInit {
   public logged_in: boolean = false;
     
   constructor(
-    public userService: UserService,
+    private userService: UserService,
+    private alertService: AlertService,
     private router: Router
   ) { }
 
@@ -23,7 +26,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.userService.logout().subscribe(() => {
+      this.alertService.clear();
       this.router.navigate(['index']);
+      this.alertService.success('You are now logged out.');
     });    
   }
 }

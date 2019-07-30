@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,7 +11,6 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-  public reset: boolean = false;
   public resetForm = this.fb.group({
     uid: '',
     token: '',
@@ -24,7 +24,9 @@ export class ResetPasswordComponent implements OnInit {
   get password2() { return this.resetForm.get('password2'); }
 
   constructor(private userService: UserService,
+              private alertService: AlertService,
               private fb: FormBuilder,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -44,7 +46,8 @@ export class ResetPasswordComponent implements OnInit {
       this.password1.value, this.password2.value)
       .subscribe((resp) => {
         if(resp['detail'] === 'Password has been reset with the new password.') {
-          this.reset = true;
+          this.router.navigate(['login']);
+          this.alertService.success('Password update. You can now log in.');
         }
       });
   }

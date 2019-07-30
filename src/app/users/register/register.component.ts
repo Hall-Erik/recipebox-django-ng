@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
+
 import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +25,7 @@ export class RegisterComponent {
 
   constructor(
     private userService: UserService,
+    private alertService: AlertService,
     private router: Router,
     private fb: FormBuilder
   ) { }
@@ -36,11 +39,12 @@ export class RegisterComponent {
   register() {
     this.userService.register(
       this.username.value, this.email.value, this.password.value)
-      .subscribe((resp) => {
+      .subscribe(() => {
         this.router.navigate(['login']);
+        this.alertService.success('Account created. You can now log in.');
       }, (err) => {
         if (err.error.username) {
-          // do something (a user with that name exists.)
+          this.alertService.error('That username is taken.');
         }
       });
   }
