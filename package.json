@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxyConfig=proxy.conf.json",
     "build": "ng build --prod --output-path ../backend/recipes/static/recipes",
     "postbuild": "python postbuild.py",
     "test": "ng test",
