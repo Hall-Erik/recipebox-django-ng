@@ -4,6 +4,8 @@ A recipe sharing app built in Django and Angular. This will be similar to the ve
 
 The Django backend can be found [here](https://github.com/Hall-Erik/recipebox-backend)
 
+This project is live on Heroku [here](https://drf-recipebox.herokuapp.com)
+
 ## Development server
 
 Download the backend from [this repository](https://github.com/Hall-Erik/recipebox-backend) and follow the directions to get it up and running.
