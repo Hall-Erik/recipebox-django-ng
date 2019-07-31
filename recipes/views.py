@@ -4,6 +4,7 @@ from rest_framework.generics import (
     CreateAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView)
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -22,12 +23,9 @@ class SignS3View(APIView):
 
     def post(self, request):
         S3_BUCKET = settings.S3_BUCKET
-
         file_name = request.data.get('file_name')
         file_type = request.data.get('file_type')
-
         s3 = boto3.client('s3')
-
         presigned_post = s3.generate_presigned_post(
             Bucket=S3_BUCKET,
             Key=file_name,
@@ -38,19 +36,22 @@ class SignS3View(APIView):
             ],
             ExpiresIn=3600
         )
-
         data = {
             'data': presigned_post,
             'url': 'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, file_name)
         }
-
         return Response(data=data)
+
+
+class RecipeListPagination(PageNumberPagination):
+    page_size = 8
 
 
 class RecipeListCreate(ListCreateAPIView):
     queryset = Recipe.objects.all().order_by('-date_posted')
     serializer_class = RecipeSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    pagination_class = RecipeListPagination
 
     def get_serializer_context(self):
         context = super().get_serializer_context()

@@ -130,7 +130,7 @@ class RecipeListCreateTests(TestCase):
         url = reverse('recipe_list_create')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, [])
+        self.assertEqual(response.data['results'], [])
 
     def test_list_with_recipes(self):
         '''
@@ -152,7 +152,7 @@ class RecipeListCreateTests(TestCase):
         url = reverse('recipe_list_create')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.data['results'], serializer.data)
 
     def test_with_made_recipe(self):
         '''
@@ -171,8 +171,8 @@ class RecipeListCreateTests(TestCase):
         url = reverse('recipe_list_create')
         response = client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn('made_it', response.data[0])
-        self.assertEqual(response.data[0]['made_it'], True)
+        self.assertIn('made_it', response.data['results'][0])
+        self.assertEqual(response.data['results'][0]['made_it'], True)
 
     def test_anon_cant_create_recipe(self):
         '''
