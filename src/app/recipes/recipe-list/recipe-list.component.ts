@@ -9,13 +9,25 @@ import { Recipe } from 'src/app/models/recipe';
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[];
+  next: string;
   
   constructor(public recipeService: RecipeService) { }
 
   ngOnInit() {
     this.recipeService.getRecipes().subscribe(
       (recipes) => {
-        this.recipes = recipes
+        this.recipes = recipes.results
+        this.next = recipes.next;
       });
+  }
+
+  getMore() {
+    if (this.next) {
+      this.recipeService.getRecipes(this.next).subscribe(
+        (recipes) => {
+          Array.prototype.push.apply(this.recipes, recipes.results);
+          this.next = recipes.next;
+        });
+    }
   }
 }

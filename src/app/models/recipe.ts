@@ -1,5 +1,14 @@
 import { User } from './user';
 
+export class RecipeList {
+    public results: Recipe[];
+    public next: string;
+
+    public constructor(init?: Partial<RecipeList>) {
+        Object.assign(this, init);
+    }
+}
+
 export class Recipe {
     public id: number = null;
     public title: string = '';

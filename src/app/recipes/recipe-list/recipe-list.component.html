@@ -4,3 +4,9 @@
     routerLink="/recipe/{{recipe.id}}"></app-recipe-card>
   </div>
 </div>
+<div class="row">
+  <div class="col text-center">
+    <button *ngIf="next" (click)="getMore()"
+    class="btn btn-outline-primary">Load More</button>
+  </div>
+</div>

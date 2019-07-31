@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from '../models/recipe';
+import { Recipe, RecipeList } from '../models/recipe';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,8 +14,11 @@ export class RecipeService {
     return this.http.post('/api/recipes/', recipe);
   }
 
-  public getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>('/api/recipes/');
+  public getRecipes(url?: string): Observable<RecipeList> {
+    if (url) {
+      return this.http.get<RecipeList>(url);
+    }
+    return this.http.get<RecipeList>('/api/recipes/');
   }
 
   public getRecipe(id: Number): Observable<Recipe> {
