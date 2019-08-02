@@ -4,6 +4,7 @@ dj-database-url==0.5.0
 Django==2.2.3
 django-heroku==0.3.1
 django-rest-auth==0.9.5
+django-rest-passwordreset==1.0.0
 djangorestframework==3.9.4
 docutils==0.14
 entrypoints==0.3
