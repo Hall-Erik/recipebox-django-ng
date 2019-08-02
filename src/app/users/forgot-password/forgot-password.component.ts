@@ -17,9 +17,9 @@ export class ForgotPasswordComponent {
   send_request() {
     this.userService.request_reset(this.email.value)
       .subscribe((resp) => {
-        if (resp['detail'] === 'Password reset e-mail has been sent.') {
+        // if (resp['detail'] === 'Password reset e-mail has been sent.') {
           this.sent = true;
-        }
+        // }
       });
   }
 }

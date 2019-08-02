@@ -12,13 +12,11 @@ import { AlertService } from '../../services/alert.service';
 })
 export class ResetPasswordComponent implements OnInit {
   public resetForm = this.fb.group({
-    uid: '',
     token: '',
     password1: ['', Validators.required],
     password2: ['', Validators.required]
   }, {validator: this.passwords_match});
   
-  get uid() { return this.resetForm.get('uid'); }
   get token() { return this.resetForm.get('token'); }
   get password1() { return this.resetForm.get('password1'); }
   get password2() { return this.resetForm.get('password2'); }
@@ -30,7 +28,6 @@ export class ResetPasswordComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.uid.setValue(this.route.snapshot.paramMap.get('uid'));
     this.token.setValue(this.route.snapshot.paramMap.get('token'));
   }
 
@@ -42,13 +39,12 @@ export class ResetPasswordComponent implements OnInit {
 
   reset_password() {
     this.userService.reset_password(
-      this.uid.value, this.token.value,
-      this.password1.value, this.password2.value)
+      this.token.value, this.password1.value)
       .subscribe((resp) => {
-        if(resp['detail'] === 'Password has been reset with the new password.') {
+        // if(resp['detail'] === 'Pas/sword has been reset with the new password.') {
           this.router.navigate(['login']);
           this.alertService.success('Password update. You can now log in.');
-        }
+        // }
       });
   }
 }

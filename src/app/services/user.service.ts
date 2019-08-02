@@ -65,12 +65,10 @@ export class UserService {
     return this.http.post(this.RESET_REQUEST_URL, {email: email});
   }
 
-  public reset_password(uid: string, token: string, password1: string, password2: string): Observable<any> {
+  public reset_password(token: string, password1: string): Observable<any> {
     return this.http.post(this.RESET_PWD_URL, {
-      uid: uid,
       token: token,
-      new_password1: password1,
-      new_password2: password2
+      password: password1,
     });
   }
 
