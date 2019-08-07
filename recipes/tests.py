@@ -16,7 +16,7 @@ class LogoutViewTests(TestCase):
         client = APIClient()
         user = User.objects.create_user(
             username='test', email='test@test.com', password='test123')
-        url = '/rest-auth/login/'
+        url = reverse('rest_login')
         data = {
             'email': 'test@test.com',
             'password': 'test123'}
@@ -27,7 +27,7 @@ class LogoutViewTests(TestCase):
         key = response.data['key']
         # Logout
         client.force_authenticate(user=user)
-        response = client.post('/rest-auth/logout/')
+        response = client.post(reverse('rest_logout'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Login again
         response = self.client.post(url, data, format='json')
@@ -44,7 +44,7 @@ class LoginViewTests(TestCase):
         '''
         User.objects.create_user(
             username='test', email='test@test.com', password='test123')
-        url = '/rest-auth/login/'
+        url = reverse('rest_login')
         data = {
             'email': 'test@test.com',
             'password': 'test123'}
@@ -59,7 +59,7 @@ class LoginViewTests(TestCase):
         '''
         User.objects.create_user(
             username='test', email='test@test.com', password='test123')
-        url = '/rest-auth/login/'
+        url = reverse('rest_login')
         data = {
             'username': 'test',
             'password': 'test123'}
@@ -74,7 +74,7 @@ class LoginViewTests(TestCase):
         '''
         User.objects.create_user(
             username='test', email='test@test.com', password='test123')
-        url = '/rest-auth/login/'
+        url = reverse('rest_login')
         data = {
             'username': 'test',
             'password': 'wrongpwd'}
@@ -104,7 +104,7 @@ class CurrentUserViewTests(TestCase):
         '''
         Anon user cannot access this endpoint.
         '''
-        url = '/rest-auth/user/'
+        url = reverse('rest_user_details')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
@@ -115,7 +115,7 @@ class CurrentUserViewTests(TestCase):
         user = User.objects.create_user(username='steve', email='s@s.com')
         client = APIClient()
         client.force_authenticate(user=user)
-        url = '/rest-auth/user/'
+        url = reverse('rest_user_details')
         response = client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         serializer = UserDetailsSerializer(user)

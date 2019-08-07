@@ -1,6 +1,10 @@
 from django.urls import path, include
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
+from rest_auth.views import (
+     LoginView,
+     LogoutView,
+     UserDetailsView)
 from . import views
 
 
@@ -14,13 +18,16 @@ urlpatterns = [
           views.MakeRecipeView.as_view(), name='recipe_make'),
 
      path('api/register/', views.RegisterView.as_view(), name='api_register'),
-     path('api/user/', views.CurrentUserView.as_view(), name='current_user'),
+     # path('api/user/', views.CurrentUserView.as_view(), name='current_user'),
 
      url(r'^api/password/reset/',
          include('django_rest_passwordreset.urls',
                  namespace='password_reset')),
 
-     url(r'rest-auth/', include('rest_auth.urls')),
+     url(r'^api/login/$', LoginView.as_view(), name='rest_login'),
+     url(r'^api/logout/$', LogoutView.as_view(), name='rest_logout'),
+     url(r'^api/user/$', UserDetailsView.as_view(), name='rest_user_details'),
+     # url(r'rest-auth/', include('rest_auth.urls')),
 
      url(r'^.*',
          TemplateView.as_view(template_name='recipes/index.html'),
