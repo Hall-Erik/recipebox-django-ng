@@ -39,8 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'django_rest_passwordreset',
+    
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
     'rest_auth',
+    'rest_auth.registration',
+
+    'django_rest_passwordreset',
     'recipes.apps.RecipesConfig',
 ]
 
@@ -129,6 +135,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication'
     ],
 }
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
+
+SITE_ID = 1
 
 S3_BUCKET = os.environ.get('S3_BUCKET_NAME')
 

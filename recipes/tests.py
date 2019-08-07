@@ -18,7 +18,7 @@ class LogoutViewTests(TestCase):
             username='test', email='test@test.com', password='test123')
         url = reverse('rest_login')
         data = {
-            'email': 'test@test.com',
+            'username': 'test',
             'password': 'test123'}
         # Login and get the first key
         response = client.post(url, data, format='json')
@@ -37,21 +37,6 @@ class LogoutViewTests(TestCase):
 
 
 class LoginViewTests(TestCase):
-    def test_login_works_with_email(self):
-        '''
-        Login should return a token key
-        if given good email/password.
-        '''
-        User.objects.create_user(
-            username='test', email='test@test.com', password='test123')
-        url = reverse('rest_login')
-        data = {
-            'email': 'test@test.com',
-            'password': 'test123'}
-        response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue('key' in response.data)
-
     def test_login_works_with_username(self):
         '''
         Login should return a token key
@@ -92,7 +77,8 @@ class RegisterUserTests(TestCase):
         data = {
             'username': 'test',
             'email': 'test@test.com',
-            'password': 'test123'}
+            'password1': 'testtest123',
+            'password2': 'testtest123'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 1)

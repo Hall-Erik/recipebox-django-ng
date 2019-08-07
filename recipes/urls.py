@@ -5,6 +5,7 @@ from rest_auth.views import (
      LoginView,
      LogoutView,
      UserDetailsView)
+from rest_auth.registration.views import RegisterView
 from . import views
 
 
@@ -17,18 +18,14 @@ urlpatterns = [
      path('api/recipes/<id>/made/',
           views.MakeRecipeView.as_view(), name='recipe_make'),
 
-     path('api/register/', views.RegisterView.as_view(), name='api_register'),
-     # path('api/user/', views.CurrentUserView.as_view(), name='current_user'),
-
-     url(r'^api/password/reset/',
+     path('api/register/', RegisterView.as_view(), name='api_register'),
+     path('api/login/', LoginView.as_view(), name='rest_login'),
+     path('api/logout/', LogoutView.as_view(), name='rest_logout'),
+     path('api/user/', UserDetailsView.as_view(), name='rest_user_details'),
+     path('api/password/reset/',
          include('django_rest_passwordreset.urls',
                  namespace='password_reset')),
-
-     url(r'^api/login/$', LoginView.as_view(), name='rest_login'),
-     url(r'^api/logout/$', LogoutView.as_view(), name='rest_logout'),
-     url(r'^api/user/$', UserDetailsView.as_view(), name='rest_user_details'),
-     # url(r'rest-auth/', include('rest_auth.urls')),
-
+     
      url(r'^.*',
          TemplateView.as_view(template_name='recipes/index.html'),
          name='home'),

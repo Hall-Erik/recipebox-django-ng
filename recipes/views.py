@@ -93,17 +93,3 @@ class MakeRecipeView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         mr.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class CurrentUserView(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data)
-
-
-class RegisterView(CreateAPIView):
-    model = User
-    permission_classes = (AllowAny,)
-    serializer_class = UserSerializer
