@@ -81,11 +81,12 @@ export class UserService {
     });
   }
 
-  public register(username: string, email: string, password: string): Observable<any> {
+  public register(username: string, email: string, password1: string, password2: string): Observable<any> {
     return this.http.post(this.REGISTER_URL, {
       username: username,
       email: email,
-      password: password
+      password1: password1,
+      password2: password2
     });
   }
 

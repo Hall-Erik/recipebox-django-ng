@@ -23,6 +23,11 @@ export class RegisterComponent {
   get password() { return this.registerForm.get('password'); }
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
 
+  public username_err = "";
+  public email_err = "";
+  public password_err = "";
+  public confirm_err = "";
+
   constructor(
     private userService: UserService,
     private alertService: AlertService,
@@ -38,13 +43,27 @@ export class RegisterComponent {
 
   register() {
     this.userService.register(
-      this.username.value, this.email.value, this.password.value)
+      this.username.value, this.email.value, this.password.value, this.confirmPassword.value)
       .subscribe(() => {
         this.router.navigate(['login']);
         this.alertService.success('Account created. You can now log in.');
       }, (err) => {
+        this.alertService.error("Could not register with the information provided.");
         if (err.error.username) {
-          this.alertService.error('That username is taken.');
+          this.username_err = err.error.username;
+          this.username.setErrors({"api": true});
+        }
+        if (err.error.email) {
+          this.email_err = err.error.email;
+          this.email.setErrors({"api": true});
+        }
+        if (err.error.password1) {
+          this.password_err = err.error.password1;
+          this.password.setErrors({"api": true});
+        }
+        if (err.error.password2) {
+          this.confirm_err = err.error.password2;
+          this.confirmPassword.setErrors({"api": true});
         }
       });
   }

@@ -10,7 +10,10 @@
           <div class="form-errors"
           *ngIf="username.invalid && username.touched">
             <small>
-              <p *ngIf="username.errors.required">This field is required.</p>
+              <div *ngIf="username.errors.required">This field is required.</div>
+              <div *ngIf="username.errors.api">
+                <div *ngFor="let err of username_err">{{err}}</div>
+              </div>
             </small>
           </div>
         </div>
@@ -22,8 +25,11 @@
           <div class="form-errors"
           *ngIf="email.invalid && email.touched">
             <small>
-              <p *ngIf="email.errors.required">This field is required.</p>
-              <p *ngIf="email.errors.email">Must be an email address.</p>
+              <div *ngIf="email.errors.required">This field is required.</div>
+              <div *ngIf="email.errors.email">Must be an email address.</div>
+              <div *ngIf="email.errors.api">
+                <div *ngFor="let err of email_err">{{err}}</div>
+              </div>
             </small>
           </div>
         </div>
@@ -37,7 +43,10 @@
           <div class="form-errors"
           *ngIf="password.invalid && password.touched">
             <small>
-              <p *ngIf="password.errors.required">This field is required.</p>
+              <div *ngIf="password.errors.required">This field is required.</div>
+              <div *ngIf="password.errors.api">
+                <div *ngFor="let err of password_err">{{err}}</div>
+              </div>
             </small>
           </div>
         </div>
@@ -51,7 +60,10 @@
           <div class="form-errors" 
           *ngIf="confirmPassword.invalid && confirmPassword.touched">
             <small>
-              <p *ngIf="confirmPassword.errors.required">This field is required.</p>
+              <div *ngIf="confirmPassword.errors.required">This field is required.</div>
+              <div *ngIf="password.errors.api">
+                  <div *ngFor="let err of confirm_err">{{err}}</div>
+              </div>
             </small>
           </div>
         </div>
