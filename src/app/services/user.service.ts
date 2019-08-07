@@ -9,11 +9,12 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
+  private USER_URL = '/api/user/';
   private REGISTER_URL = '/api/register/';
   private LOGIN_URL = '/rest-auth/login/';
-  private RESET_REQUEST_URL = '/rest-auth/password/reset/';
-  private RESET_PWD_URL = '/rest-auth/password/reset/confirm/';
-  private CHANGE_PWD_URL = 'rest-auth/password/change/';
+  private RESET_REQUEST_URL = '/api/password/reset/';
+  private RESET_PWD_URL = '/api/password/reset/confirm/';
+  private CHANGE_PWD_URL = '/api/password/change/';
   private LOGOUT_URL = '/rest-auth/logout/';
 
   private _user: User;
@@ -40,7 +41,7 @@ export class UserService {
   }
 
   public getUser(): Observable<User> {
-    return this.http.get<User>('/rest-auth/user/')
+    return this.http.get<User>(this.USER_URL)
       .pipe(map((resp: User) => {
         this._user = resp;
         this._logged_in.next(true);
