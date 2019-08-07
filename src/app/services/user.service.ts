@@ -11,11 +11,11 @@ import { User } from '../models/user';
 export class UserService {
   private USER_URL = '/api/user/';
   private REGISTER_URL = '/api/register/';
-  private LOGIN_URL = '/rest-auth/login/';
+  private LOGIN_URL = '/api/login/';
   private RESET_REQUEST_URL = '/api/password/reset/';
   private RESET_PWD_URL = '/api/password/reset/confirm/';
   private CHANGE_PWD_URL = '/api/password/change/';
-  private LOGOUT_URL = '/rest-auth/logout/';
+  private LOGOUT_URL = '/api/logout/';
 
   private _user: User;
   private _logged_in = new Subject<boolean>();
