@@ -24,7 +24,7 @@ export class RecipeFormComponent {
   public recipeForm = this.fb.group({
     title: ['', Validators.required],
     description: [''],
-    servings: ['', Validators.required],
+    servings: ['', [Validators.required, Validators.pattern(/^\d+$|^\d+-\d+$/)]],
     cook_time: ['', Validators.required],
     ingredients: ['', Validators.required],
     directions: ['', Validators.required],

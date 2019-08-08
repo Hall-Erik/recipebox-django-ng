@@ -27,13 +27,14 @@
 
   <div class="form-group">
     <label for="servings">Servings</label>
-    <input type="number" formControlName="servings"
+    <input type="text" formControlName="servings"
     class="form-control" placeholder="3-4"
     [ngClass]="{'is-invalid': servings.invalid && servings.touched}">
     <div class="form-errors"
     *ngIf="servings.invalid && servings.touched">
       <small>
         <p *ngIf="servings.errors.required">This field is required.</p>
+        <p *ngIf="servings.errors.pattern">This field must be a number or a range of numbers.</p>
       </small>
     </div>
   </div>
