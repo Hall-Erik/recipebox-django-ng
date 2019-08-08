@@ -17,15 +17,17 @@ urlpatterns = [
      path('api/recipes/<id>', views.RecipeRUD.as_view(), name='recipe_rud'),
      path('api/recipes/<id>/made/',
           views.MakeRecipeView.as_view(), name='recipe_make'),
+     path('api/users/<id>/recipes/',
+          views.UserRecipeListView.as_view(), name='user_recipes'),
 
      path('api/register/', RegisterView.as_view(), name='api_register'),
      path('api/login/', LoginView.as_view(), name='rest_login'),
      path('api/logout/', LogoutView.as_view(), name='rest_logout'),
      path('api/user/', UserDetailsView.as_view(), name='rest_user_details'),
      path('api/password/reset/',
-         include('django_rest_passwordreset.urls',
-                 namespace='password_reset')),
-     
+          include('django_rest_passwordreset.urls',
+                  namespace='password_reset')),
+
      url(r'^.*',
          TemplateView.as_view(template_name='recipes/index.html'),
          name='home'),

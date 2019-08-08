@@ -1,20 +1,21 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import (
-    CreateAPIView,
     ListCreateAPIView,
+    ListAPIView,
     RetrieveUpdateDestroyAPIView)
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
     IsAuthenticatedOrReadOnly)
+from .permissions import IsOwnerOrReadOnly
 from rest_framework import status
 import boto3
-from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 from .models import Recipe, MadeRecipe
-from .serializers import UserSerializer, RecipeSerializer
+from .serializers import RecipeSerializer
 from recipebox import settings
 
 
@@ -74,6 +75,17 @@ class RecipeRUD(RetrieveUpdateDestroyAPIView):
         user_id = getattr(self.request.user, 'id', None)
         context.update({'user_id': user_id})
         return context
+
+
+class UserRecipeListView(ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = RecipeSerializer
+    pagination_class = RecipeListPagination
+
+    def get_queryset(self):
+        user_id = self.kwargs.get('id')
+        user = get_object_or_404(User, pk=user_id)
+        return user.recipe_set.all()
 
 
 class MakeRecipeView(APIView):
