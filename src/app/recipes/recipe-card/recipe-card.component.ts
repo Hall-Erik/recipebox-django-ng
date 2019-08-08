@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-
+import { Router } from '@angular/router'
 import { Recipe } from '../../models/recipe';
 
 @Component({
@@ -9,4 +9,10 @@ import { Recipe } from '../../models/recipe';
 })
 export class RecipeCardComponent {
   @Input() recipe: Recipe;
+
+  constructor(private router: Router) { }
+
+  user_recipes() {
+    this.router.navigate([`/user/${this.recipe.user.pk}/recipes`]);
+  }
 }

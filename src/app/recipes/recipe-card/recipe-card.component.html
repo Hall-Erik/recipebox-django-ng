@@ -6,7 +6,7 @@
   <div class="card-body">
     <h4 class="card-title"><a>{{recipe.title}}</a></h4>
     <small class="card-text text-muted">
-      Author: <a>{{recipe.user.username}}</a>
+      Author: <a routerLink="/user/{{recipe.user.pk}}/recipes" (click)="user_recipes()">{{recipe.user.username}}</a>
     </small>
     <p class="card-text">{{ recipe.description }}</p>
   </div>

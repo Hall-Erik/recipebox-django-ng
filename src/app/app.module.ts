@@ -25,6 +25,7 @@ import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 
 import { RecipeInterceptor } from './services/recipe.interceptor';
+import { UserRecipeListComponent } from './recipes/user-recipe-list/user-recipe-list.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RecipeInterceptor } from './services/recipe.interceptor';
     RecipeFormComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    AlertComponent
+    AlertComponent,
+    UserRecipeListComponent
   ],
   imports: [
     BrowserModule,

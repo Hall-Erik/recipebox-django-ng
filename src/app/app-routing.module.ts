@@ -8,6 +8,7 @@ import { RegisterComponent } from './users/register/register.component';
 import { LoginComponent } from './users/login/login.component';
 import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
+import { UserRecipeListComponent } from './recipes/user-recipe-list/user-recipe-list.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "index"},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: "recipes/create", component: RecipeCreateComponent},
   {path: "recipe/:id", component: RecipeDetailComponent},
   {path: "recipe/:id/edit", component: RecipeEditComponent},
+  {path: "user/:id/recipes", component: UserRecipeListComponent},
   {path: "login", component: LoginComponent},
   {path: "forgot-password", component: ForgotPasswordComponent},
   {path: "reset/:token", component: ResetPasswordComponent},

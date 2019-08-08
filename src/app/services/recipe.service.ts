@@ -14,6 +14,13 @@ export class RecipeService {
     return this.http.post('/api/recipes/', recipe);
   }
 
+  public getUserRecipes(user_id: string, url?: string): Observable<RecipeList> {
+    if (url) {
+      return this.http.get<RecipeList>(url);
+    }
+    return this.http.get<RecipeList>(`/api/users/${user_id}/recipes/`);
+  }
+
   public getRecipes(url?: string): Observable<RecipeList> {
     if (url) {
       return this.http.get<RecipeList>(url);

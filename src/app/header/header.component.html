@@ -28,7 +28,7 @@
             aria-expanded="false">{{userService.user.username}}</a>
             <div class="dropdown-menu dropdown-menu-right"
             aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item link" >User Stats</a>
+              <a class="dropdown-item link" routerLink="/user/{{userService.user.pk}}/recipes">My Recipes</a>
               <a class="dropdown-item link" >Account Settings</a>
               <a class="dropdown-item link" (click)="logout()">Logout</a>
             </div>
