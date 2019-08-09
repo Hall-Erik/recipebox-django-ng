@@ -4,7 +4,8 @@ from django.views.generic.base import TemplateView
 from rest_auth.views import (
      LoginView,
      LogoutView,
-     UserDetailsView)
+     UserDetailsView,
+     PasswordChangeView)
 from rest_auth.registration.views import RegisterView
 from . import views
 
@@ -24,6 +25,8 @@ urlpatterns = [
      path('api/login/', LoginView.as_view(), name='rest_login'),
      path('api/logout/', LogoutView.as_view(), name='rest_logout'),
      path('api/user/', UserDetailsView.as_view(), name='rest_user_details'),
+     path('api/password/change/', PasswordChangeView.as_view(),
+          name='rest_password_change'),
      path('api/password/reset/',
           include('django_rest_passwordreset.urls',
                   namespace='password_reset')),
