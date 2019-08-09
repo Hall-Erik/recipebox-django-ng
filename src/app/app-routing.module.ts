@@ -9,6 +9,7 @@ import { LoginComponent } from './users/login/login.component';
 import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 import { UserRecipeListComponent } from './recipes/user-recipe-list/user-recipe-list.component';
+import { AccountComponent } from './users/account/account.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "index"},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "forgot-password", component: ForgotPasswordComponent},
   {path: "reset/:token", component: ResetPasswordComponent},
-  {path: "register", component: RegisterComponent}
+  {path: "register", component: RegisterComponent},
+  {path: "account", component: AccountComponent}
 ];
 
 @NgModule({

@@ -42,7 +42,6 @@ export class ResetPasswordComponent implements OnInit {
         if (err.error.status === "expired") {
           this.tokenStatus = Status.EXPIRED;
         }
-        console.log(err.error);
       });
   }
 
