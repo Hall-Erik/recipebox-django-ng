@@ -21,6 +21,8 @@ export class ResetPasswordComponent implements OnInit {
   get password1() { return this.resetForm.get('password1'); }
   get password2() { return this.resetForm.get('password2'); }
 
+  public tokenStatus: Status = Status.LOADING;
+
   constructor(private userService: UserService,
               private alertService: AlertService,
               private fb: FormBuilder,
@@ -28,8 +30,26 @@ export class ResetPasswordComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.token.setValue(this.route.snapshot.paramMap.get('token'));
+    let token = this.route.snapshot.paramMap.get('token');
+    this.token.setValue(token);
+    this.userService.validate_token(token)
+      .subscribe(() => {
+        this.tokenStatus = Status.VALID;
+      }, (err) => {
+        if (err.error.status === "notfound") {
+          this.tokenStatus = Status.NOT_FOUND;
+        }
+        if (err.error.status === "expired") {
+          this.tokenStatus = Status.EXPIRED;
+        }
+        console.log(err.error);
+      });
   }
+
+  token_loading() { return this.tokenStatus == Status.LOADING; }
+  token_valid() { return this.tokenStatus == Status.VALID; }
+  token_notfound() { return this.tokenStatus == Status.NOT_FOUND; }
+  token_expired() { return this.tokenStatus == Status.EXPIRED; }
 
   passwords_match(c: AbstractControl) {
     if (c.get('password1').value !== c.get('password2').value) {
@@ -40,11 +60,16 @@ export class ResetPasswordComponent implements OnInit {
   reset_password() {
     this.userService.reset_password(
       this.token.value, this.password1.value)
-      .subscribe((resp) => {
-        // if(resp['detail'] === 'Pas/sword has been reset with the new password.') {
+      .subscribe(() => {
           this.router.navigate(['login']);
           this.alertService.success('Password update. You can now log in.');
-        // }
       });
   }
+}
+
+export enum Status {
+  LOADING,
+  NOT_FOUND,
+  EXPIRED,
+  VALID
 }

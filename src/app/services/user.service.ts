@@ -13,6 +13,7 @@ export class UserService {
   private REGISTER_URL = '/api/register/';
   private LOGIN_URL = '/api/login/';
   private RESET_REQUEST_URL = '/api/password/reset/';
+  private VALIDATE_TOKEN_URL = '/api/password/reset/validate_token/';
   private RESET_PWD_URL = '/api/password/reset/confirm/';
   private CHANGE_PWD_URL = '/api/password/change/';
   private LOGOUT_URL = '/api/logout/';
@@ -64,6 +65,10 @@ export class UserService {
 
   public request_reset(email: string): Observable<any> {
     return this.http.post(this.RESET_REQUEST_URL, {email: email});
+  }
+
+  public validate_token(token: string): Observable<any> {
+    return this.http.post(this.VALIDATE_TOKEN_URL, {token: token});
   }
 
   public reset_password(token: string, password1: string): Observable<any> {
