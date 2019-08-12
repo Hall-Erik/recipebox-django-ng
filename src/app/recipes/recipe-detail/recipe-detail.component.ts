@@ -37,15 +37,8 @@ export class RecipeDetailComponent implements OnInit {
 
   make() {
     this.recipeService.makeRecipe(this.recipe.id)
-      .subscribe(() => {
-        this.recipe.made_it = true;
-      });
-  }
-
-  unmake() {
-    this.recipeService.unmakeRecipe(this.recipe.id)
-      .subscribe(() => {
-        this.recipe.made_it = false;
+      .subscribe((resp: Recipe) => {
+        this.recipe = resp;
       });
   }
 

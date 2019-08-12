@@ -26,39 +26,47 @@
     </div>
   </div>
   <div class="row mt-2">
-    <div *ngIf="logged_in">
+    <div class="col">
+      {{recipe.made_it_count}} user(s) made this.&nbsp;
+    </div>
+  </div>
+  <div class="row mt-2" *ngIf="logged_in">
+    <div class="col">
       <input *ngIf="recipe.made_it" type="button" id="made-it"
       class="btn btn-outline-success" value="✓ Made it."
-      (click)="unmake()" />
+      (click)="make()" />
       <input *ngIf="!recipe.made_it" type="button" id="made-it"
-       class="btn btn-success" value="Made it?"
-       (click)="make()" />
+      class="btn btn-success" value="Made it?"
+      (click)="make()" />
     </div>
-    <div class="ml-1"></div>
   </div>
-  <div class="row">
+  <div class="row mt-2">
     <div *ngIf="recipe.ingredients" class="col-sm-12 col-md-4">
       <div class="row">
-        <h3>Ingredients</h3>
+        <div class="col"><h3>Ingredients</h3></div>
       </div>
       <div class="row">
-        <ul>
-          <li *ngFor="let ingredient of recipe.ingredients.split('\n')">
-            {{ingredient}}
-          </li>
-        </ul>
+        <div class="col">
+          <ul>
+            <li *ngFor="let ingredient of recipe.ingredients.split('\n')">
+              {{ingredient}}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>	
     <div *ngIf="recipe.directions" class="col-sm-12 col-md-8">
       <div class="row">			
-        <h3>Directions</h3>
+        <div class="col"><h3>Directions</h3></div>
       </div>	
       <div class="row">
-        <ol>
-          <li *ngFor="let direction of recipe.directions.split('\n')">
-            {{direction}}
-          </li>
-        </ol>
+        <div class="col">
+          <ol>
+            <li *ngFor="let direction of recipe.directions.split('\n')">
+              {{direction}}
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>

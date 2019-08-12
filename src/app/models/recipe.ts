@@ -21,6 +21,7 @@ export class Recipe {
     public directions: string = '';
     public user: User = null;
     public made_it: boolean = false;
+    public made_it_count: number = 0;
 
     public constructor(init?: Partial<Recipe>) {
         Object.assign(this, init);
