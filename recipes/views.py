@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import (
@@ -91,17 +92,18 @@ class UserRecipeListView(ListAPIView):
 class MakeRecipeView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, id):
-        if MadeRecipe.objects.filter(
-          user_id=request.user.id, recipe_id=id).count() == 1:
-            return Response(status.HTTP_400_BAD_REQUEST)
-        MadeRecipe.objects.create(recipe_id=id, user=request.user)
-        return Response(status=status.HTTP_201_CREATED)
+    def get_object(self, pk):
+        try:
+            return Recipe.objects.get(pk=pk)
+        except:
+            raise Http404
 
-    def delete(self, request, id):
-        mr = MadeRecipe.objects.filter(
-          user_id=request.user.id, recipe_id=id).first()
+    def put(self, request, id):
+        recipe = self.get_object(pk=id)
+        mr = recipe.maderecipe_set.filter(user=request.user).first()
         if not mr:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        mr.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+            recipe.maderecipe_set.create(user=request.user)
+        else:
+            mr.delete()
+        serializer = RecipeSerializer(recipe, context={'user_id': request.user.id})
+        return Response(serializer.data)

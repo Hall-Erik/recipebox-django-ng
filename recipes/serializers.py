@@ -24,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     made_it = serializers.SerializerMethodField('_made_it')
+    made_it_count = serializers.SerializerMethodField('_made_it_count')
 
     def _made_it(self, obj):
         user_id = self.context.get('user_id')
@@ -33,11 +34,14 @@ class RecipeSerializer(serializers.ModelSerializer):
                 return True
         return False
 
+    def _made_it_count(self, obj):
+        return obj.maderecipe_set.count()
+
     class Meta:
         model = Recipe
         fields = (
             'id', 'title', 'description', 'cook_time', 'servings',
             'date_posted', 'image_file', 'ingredients', 'directions',
-            'user', 'made_it')
+            'user', 'made_it', 'made_it_count')
         extra_kwargs = {
             'id': {'read_only': True}}

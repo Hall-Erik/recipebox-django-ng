@@ -428,8 +428,8 @@ class MadeRecipeTests(TestCase):
             directions='cook, eat', user=owner)
         url = reverse('recipe_make', kwargs={'id': recipe.id})
         client.force_authenticate(user=user)
-        response = client.post(url, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        response = client.put(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             MadeRecipe.objects.filter(recipe=recipe, user=user).count(), 1)
 
@@ -449,7 +449,7 @@ class MadeRecipeTests(TestCase):
         MadeRecipe.objects.create(user=user, recipe=recipe)
         url = reverse('recipe_make', kwargs={'id': recipe.id})
         client.force_authenticate(user=user)
-        response = client.delete(url, format='json')
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        response = client.put(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             MadeRecipe.objects.filter(recipe=recipe, user=user).count(), 0)
