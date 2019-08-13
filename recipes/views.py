@@ -12,10 +12,9 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly)
 from .permissions import IsOwnerOrReadOnly
-from rest_framework import status
 import boto3
 from django.contrib.auth.models import User
-from .models import Recipe, MadeRecipe
+from .models import Recipe
 from .serializers import RecipeSerializer
 from recipebox import settings
 
@@ -95,7 +94,7 @@ class MakeRecipeView(APIView):
     def get_object(self, pk):
         try:
             return Recipe.objects.get(pk=pk)
-        except:
+        except Recipe.DoesNotExist:
             raise Http404
 
     def put(self, request, id):
@@ -105,5 +104,6 @@ class MakeRecipeView(APIView):
             recipe.maderecipe_set.create(user=request.user)
         else:
             mr.delete()
-        serializer = RecipeSerializer(recipe, context={'user_id': request.user.id})
+        serializer = RecipeSerializer(
+            recipe, context={'user_id': request.user.id})
         return Response(serializer.data)
