@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
@@ -25,9 +25,20 @@ export class UserRecipeListComponent implements OnInit {
       });
   }
 
-  getMore() {
-    if (this.next) {
-      this.recipeService.getUserRecipes(this.userId, this.next).subscribe(
+  @HostListener("window:scroll")
+  onWindowScroll() {
+    let pos = Math.ceil(window.innerHeight + window.scrollY);
+    let max = document.documentElement.scrollHeight;
+    if (pos == max) {
+      let next = this.next;
+      this.next = null; // to prevent race condition.
+      this.getMore(next);
+    }
+  }
+
+  getMore(next: string) {
+    if (next) {
+      this.recipeService.getUserRecipes(this.userId, next).subscribe(
         (recipes) => {
           Array.prototype.push.apply(this.recipes, recipes.results);
           this.next = recipes.next;
