@@ -24,6 +24,9 @@ class Recipe(models.Model):
     def __str__(self):
         return str(self.title)
 
+    class Meta:
+        ordering = ['-date_posted']
+
 
 class MadeRecipe(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)

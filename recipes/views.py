@@ -49,7 +49,7 @@ class RecipeListPagination(PageNumberPagination):
 
 
 class RecipeListCreate(ListCreateAPIView):
-    queryset = Recipe.objects.all().order_by('-date_posted')
+    queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
     pagination_class = RecipeListPagination
