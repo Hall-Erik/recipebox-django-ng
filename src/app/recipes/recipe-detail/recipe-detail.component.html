@@ -16,28 +16,28 @@
     </div>
     <div class="col-sm-12 col-md-9">
       <div class="row">
-        <small class="text-muted">
-          User: <a routerLink="/user/{{recipe.user.pk}}/recipes">{{recipe.user.username}}</a> | Cook time: {{recipe.cook_time}} minutes | Serves: {{ recipe.servings }}
-        </small>
+        <div class="col">
+          <small class="text-muted">
+            User: <a routerLink="/user/{{recipe.user.pk}}/recipes">{{recipe.user.username}}</a> | Cook time: {{recipe.cook_time}} minutes | Serves: {{ recipe.servings }}
+          </small>
+        </div>
       </div>
       <div class="row">
-        <p>{{recipe.description}}</p>
+        <div class="col">
+          <p>{{recipe.description}}</p>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="row mt-2">
-    <div class="col">
-      {{recipe.made_it_count}} user(s) made this.&nbsp;
     </div>
   </div>
   <div class="row mt-2" *ngIf="logged_in">
     <div class="col">
-      <input *ngIf="recipe.made_it" type="button" id="made-it"
-      class="btn btn-outline-success" value="✓ Made it."
-      (click)="make()" />
-      <input *ngIf="!recipe.made_it" type="button" id="made-it"
-      class="btn btn-success" value="Made it?"
-      (click)="make()" />
+      <input type="button" id="made-it" class="btn"
+      [class.btn-outline-secondary]="recipe.made_it"
+      [class.btn-outline-success]="!recipe.made_it"
+      [value]="recipe.made_it ?
+        'Made it. ' + recipe.made_it_count : 
+        'Made it? ' + recipe.made_it_count"
+      (click)="make()">
     </div>
   </div>
   <div class="row mt-2">
