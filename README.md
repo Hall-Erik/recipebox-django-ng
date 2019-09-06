@@ -1,5 +1,8 @@
 # recipe_box
 
+[![Build Status](https://travis-ci.org/Hall-Erik/recipebox-django-ng.svg?branch=master)](https://travis-ci.org/Hall-Erik/recipebox-django-ng)
+[![Coverage Status](https://coveralls.io/repos/github/Hall-Erik/recipebox-django-ng/badge.svg?branch=master)](https://coveralls.io/github/Hall-Erik/recipebox-django-ng?branch=master)
+
 A recipe sharing app built in Django and Angular. This is similar to a project I built in Flask [here](https://github.com/Hall-Erik/recipe_box).
 
 This project is live on Heroku [here](https://drf-recipebox.herokuapp.com)
