@@ -1,14 +1,14 @@
-# recipe_box Back-end
+# recipe_box
 
-A recipe sharing app built in Django and Angular. This will be similar to the version I built in Flask [here](https://github.com/Hall-Erik/recipe_box).
-
-The Angular frontend can be found [here](https://github.com/Hall-Erik/recipebox-frontend)
+A recipe sharing app built in Django and Angular. This is similar to a project I built in Flask [here](https://github.com/Hall-Erik/recipe_box).
 
 This project is live on Heroku [here](https://drf-recipebox.herokuapp.com)
 
 ## Development server
 
-Download and run `python manage.py migrate` to build a SQLite database.
+### Backend
+
+Open a terminal in the project root and run `python manage.py migrate` to build a SQLite database.
 
 Download the dependencies with `pip install -r requirements.txt`.
 
@@ -19,6 +19,18 @@ You will need a Sendgrid account to get the email backend working. Follow direct
 
 Run `python manage.py runserver` for a dev server. The app will automatically reload if you change any of the source files.
 
+### Frontend
+
+Open a terminal in the ng_frontend directory and run `npm install`
+
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
 ## Running unit tests
 
 Run `python manage.py test` to execute the tests.
+
+## Building the Frontend
+
+The build process uses a Python script called `ng2django`.  So, be sure to use an environment where you have installed dependencies with `pip install -r requirements.txt`.
+
+Then you can `cd` into the `ng_frontend` directory.  Run `npm run build`.
