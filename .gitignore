@@ -143,21 +143,21 @@ dmypy.json
 # End of https://www.gitignore.io/api/django
 
 # compiled output
-/dist
-/tmp
-/out-tsc
+ng_frontend/dist
+ng_frontend/tmp
+ng_frontend/out-tsc
 # Only exists if Bazel was run
-/bazel-out
+ng_frontend/bazel-out
 
 # dependencies
-/node_modules
+node_modules/
 
 # profiling files
 chrome-profiler-events.json
 speed-measure-plugin.json
 
 # IDEs and editors
-/.idea
+.idea
 .project
 .classpath
 .c9/
@@ -174,14 +174,14 @@ speed-measure-plugin.json
 .history/*
 
 # misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
+.sass-cache
+connect.lock
+coverage
+libpeerconnection.log
 npm-debug.log
 yarn-error.log
 testem.log
-/typings
+typings
 
 # System Files
 .DS_Store
