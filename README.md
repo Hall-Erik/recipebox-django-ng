@@ -28,6 +28,16 @@ Open a terminal in the ng_frontend directory and run `npm install`
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Docker Compose
+
+Alternatively, you could just run the project in Docker.
+
+Open a terminal in the project root and run `docker-compose build` to set up your containers.
+
+Run `docker-compose up` to run the images.
+
+Go to `http://localhost:1337/` in your browser.
+
 ## Running unit tests
 
 Run `python manage.py test` to execute the tests.

@@ -1,0 +1,7 @@
+venv/
+db.sqlite3
+db.sqlite3.bak
+__pycache__/
+.vscode/
+nginx/
+ng_frontend/
