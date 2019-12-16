@@ -22,6 +22,7 @@ export class UserRecipeListComponent implements OnInit {
       .subscribe((recipes) => {
         this.recipes = recipes.results;
         this.next = recipes.next;
+        this.onWindowScroll();
       });
   }
 

@@ -18,6 +18,7 @@ export class RecipeListComponent implements OnInit {
       (recipes) => {
         this.recipes = recipes.results
         this.next = recipes.next;
+        this.onWindowScroll();
       });
   }
 
