@@ -45,7 +45,7 @@ class SignS3View(APIView):
 
 
 class RecipeListPagination(PageNumberPagination):
-    page_size = 8
+    page_size = 16
 
 
 class RecipeListCreate(ListCreateAPIView):
