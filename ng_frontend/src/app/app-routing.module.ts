@@ -12,7 +12,7 @@ import { UserRecipeListComponent } from './recipes/user-recipe-list/user-recipe-
 import { AccountComponent } from './users/account/account.component';
 
 const routes: Routes = [
-  {path: "", pathMatch: "full", redirectTo: "index"},
+  {path: "", pathMatch: "full", redirectTo: "/index"},
   {path: "index", component: RecipeListComponent},
   {path: "recipes/create", component: RecipeCreateComponent},
   {path: "recipe/:id", component: RecipeDetailComponent},
